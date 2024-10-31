@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Cardápio = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <>Esse é o Cardapio</>;
+};
 
-export default Cardápio
+export default Cardápio;
