@@ -62,7 +62,7 @@ const Login: React.FC = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
-          Entrar
+          <h1 className=''>Entrar</h1>
         </Typography>
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%' }}>
           <Grid container spacing={2}>

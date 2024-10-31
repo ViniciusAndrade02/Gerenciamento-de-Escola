@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import './index.css'
 import Login from "./pages/Autentication/Login";
 import Noticia from "./pages/Users/Noticia";
 import Navegacao from "./components/@fixed/Navegacao";
