@@ -21,6 +21,7 @@ const IndexRouter = createBrowserRouter(
         <Route path="cardapio" element={<Cardápio />} />
         <Route path="perfil" element={<Perfil />} />
       </Route>
+
     </Route>
   )
 );

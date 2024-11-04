@@ -592,20 +592,20 @@ video {
   position: relative;
 }
 
-.top-10 {
-  top: 2.5rem;
+.left-10 {
+  left: 2.5rem;
 }
 
-.top-5 {
-  top: 1.25rem;
+.right-3 {
+  right: 0.75rem;
 }
 
-.top-2 {
-  top: 0.5rem;
+.right-4 {
+  right: 1rem;
 }
 
-.top-3 {
-  top: 0.75rem;
+.right-5 {
+  right: 1.25rem;
 }
 
 .mx-10 {
@@ -626,12 +626,40 @@ video {
   margin-top: 0.5rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .flex {
   display: flex;
 }
 
+.grid {
+  display: grid;
+}
+
 .w-auto {
   width: auto;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -644,6 +672,18 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .border {
@@ -670,7 +710,7 @@ video {
   line-height: 1.75rem;
 }
 
-.\!text-black {
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }

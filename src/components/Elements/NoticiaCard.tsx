@@ -14,7 +14,7 @@ const NoticiaCard = ({
 }: NoticiaCard) => {
   return (
     <>
-      <div className="flex flex-col mx-10 mb-4 bg-gray-50">
+      <div className="flex flex-col mb-4 bg-gray-50">
         <img className="w-auto h-30 object-cover" src={imagemUrl} alt="" />
 
         <div className="flex justify-between px-2 mt-2">
