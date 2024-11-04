@@ -44,8 +44,14 @@ const Login: React.FC = () => {
     try {
       console.log("Dados do Login:", data);
       const response = await api.post("/auth/login", data);
-
+      const token = response.data
+      const dados = await api.post("/usuario", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
+      console.log(dados)
     } catch (error) {
       console.error("Erro na autenticação:", error);
     }
