@@ -24,7 +24,7 @@ const NavegationAll = () => {
   const navegate = useNavigate();
   const location = useLocation();
 
-  const [route, setRoute] = useState<Route>(
+  const [route] = useState<Route>(
     user.role === "ADMIN"
       ? Admin
       : user.role === "PAI"
@@ -37,7 +37,7 @@ const NavegationAll = () => {
   };
 
   const Page = (index: number) => {
-    route.nameNavegation.map((a, b): any => {
+    route.nameNavegation.map((_, b): any => {
       if (index == 0) {
         return navegate("/" + route.urlDefault);
       }
