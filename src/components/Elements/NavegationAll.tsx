@@ -14,43 +14,53 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth";
+import { Admin, Menu, Route } from "./NavegationState";
 
 const NavegationAll = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [pagination, setPagination] = useState<string>();
 
   const navegate = useNavigate();
   const location = useLocation();
 
-  const urlDefault = "/menu";
+  const [route, setRoute] = useState<Route>(
+    user.role === "ADMIN"
+      ? Admin
+      : user.role === "PAI"
+      ? Menu
+      : { urlDefault: "", urls: [], namePage: [], nameNavegation: [] }
+  );
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
   const Page = (index: number) => {
-    switch (index) {
-      case 0:
-        navegate(`${urlDefault}`);
-        break;
-      case 1:
-        navegate(`${urlDefault}/cardapio`);
-        break;
-      case 2:
-        navegate(`${urlDefault}/perfil`);
-        break;
-    }
+    route.nameNavegation.map((a, b): any => {
+      if (index == 0) {
+        return navegate("/" + route.urlDefault);
+      }
+
+      if (index == route.nameNavegation.length - 1) {
+        logout();
+        return navegate("/");
+      }
+
+      if (b == index) {
+        return navegate("/" + route.urlDefault + "/" + route.urls[b - 1]);
+      }
+    });
   };
 
   useEffect(() => {
     const urlStage = location.pathname.split("/")[2];
     if (urlStage === undefined) {
-      setPagination("Noticias do Dia");
+      setPagination(route.namePage[0]);
     } else if (urlStage === "cardapio") {
-      setPagination("Cardápio da Semana");
+      setPagination(route.namePage[1]);
     } else {
-      setPagination("Perfil");
+      setPagination(route.namePage[2]);
     }
   }, [location.pathname]);
 
@@ -58,7 +68,7 @@ const NavegationAll = () => {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <Divider />
       <List>
-        {["Noticias", "Cardápio", "Perfil"].map((text, index) => (
+        {route.nameNavegation.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => Page(index)}>
               <ListItemIcon>

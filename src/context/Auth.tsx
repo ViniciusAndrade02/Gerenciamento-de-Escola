@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }: any) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
+    
   };
 
   useEffect(() => {

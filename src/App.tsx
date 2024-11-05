@@ -77,7 +77,7 @@ const IndexRouter = createBrowserRouter(
         <Route path="/admin" element={<Navegacao />}>
           <Route index element={<Turma />} />
           <Route path="noticia" element={<NoticiaAdmin />} />
-          <Route path="cadatrar" element={<Cadastrar />} />
+          <Route path="cadastrar" element={<Cadastrar />} />
         </Route>
       </Route>
     </Route>
