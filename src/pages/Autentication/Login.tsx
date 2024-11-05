@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,7 +12,7 @@ import {
   Grid,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import axios from "axios";
+import { AuthContext } from "../../context/Auth";
 
 // Schema de validação com Yup
 const validationSchema = yup.object().shape({
@@ -23,7 +23,7 @@ const validationSchema = yup.object().shape({
     .required("A senha é obrigatória"),
 });
 
-const Login: React.FC = () => {
+const Login = () => {
   const {
     handleSubmit,
     control,
@@ -31,29 +31,13 @@ const Login: React.FC = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+  const { login } = useContext(AuthContext);
 
   const onSubmit = async (data: any) => {
-    const api = axios.create({
-      baseURL: "http://44.223.188.239:8080", // URL da API
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true, // Certifique-se de permitir o envio de cookies/sessões
-    });
-
     try {
-      console.log("Dados do Login:", data);
-      const response = await api.post("/auth/login", data);
-      const token = response.data
-      const dados = await api.post("/usuario", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-      console.log(dados)
+      await login(data);
     } catch (error) {
-      console.error("Erro na autenticação:", error);
+      console.error("Erro ao fazer login:", error);
     }
   };
 
