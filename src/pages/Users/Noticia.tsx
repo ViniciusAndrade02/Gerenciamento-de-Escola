@@ -1,4 +1,4 @@
-import React from "react";
+
 import NoticiaCard from "../../components/Elements/NoticiaCard";
 
 const Noticia = () => {
