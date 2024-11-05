@@ -15,6 +15,8 @@ import Cardápio from "./pages/Users/Cardápio";
 import Turma from "./pages/Admin/Turma";
 import { useContext } from "react";
 import { AuthContext } from "./context/Auth";
+import NoticiaAdmin from "./pages/Admin/NoticiaAdmin";
+import Cadastrar from "./pages/Admin/Cadastrar";
 
 const ProtectedRoute = ({ role }: any) => {
   const { user } = useContext(AuthContext);
@@ -74,6 +76,8 @@ const IndexRouter = createBrowserRouter(
       <Route element={<ProtectedRoute role={["ADMIN"]} />}>
         <Route path="/admin" element={<Navegacao />}>
           <Route index element={<Turma />} />
+          <Route path="noticia" element={<NoticiaAdmin />} />
+          <Route path="cadatrar" element={<Cadastrar />} />
         </Route>
       </Route>
     </Route>

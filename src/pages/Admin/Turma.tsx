@@ -3,7 +3,7 @@ import React from "react";
 const Turma = () => {
   return (
     <>
-      <h1>eeeeeeeee</h1>
+      <h1>Todas as turmas</h1>
     </>
   );
 };

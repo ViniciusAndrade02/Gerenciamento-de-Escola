@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -13,12 +13,16 @@ import FeedIcon from "@mui/icons-material/Feed";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Auth";
 
 const NavegationAll = () => {
+  const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [pagination, setPagination] = useState<string>();
+
   const navegate = useNavigate();
   const location = useLocation();
+
   const urlDefault = "/menu";
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -58,12 +62,12 @@ const NavegationAll = () => {
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => Page(index)}>
               <ListItemIcon>
-                {index === 1 ? (
-                  <RestaurantMenuIcon />
-                ) : index === 2 ? (
-                  <AccountCircleIcon />
-                ) : (
+                {index === 0 ? (
                   <FeedIcon />
+                ) : index === 1 ? (
+                  <RestaurantMenuIcon />
+                ) : (
+                  <AccountCircleIcon />
                 )}
               </ListItemIcon>
               <ListItemText primary={text} />
