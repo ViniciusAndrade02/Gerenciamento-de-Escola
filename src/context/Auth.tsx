@@ -60,6 +60,8 @@ export const AuthProvider = ({ children }: any) => {
     
   };
 
+
+
   useEffect(() => {
     if (token) {
       setUser(jwtDecode(token));
