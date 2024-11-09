@@ -5,3 +5,10 @@ export interface NoticiaResponse {
   imagemUrl: string;
   dataPublicacao: Date;
 }
+
+export interface CardapioResponse {
+  id: number;
+  diaSemana: string;
+  conteudo: string;
+
+}
