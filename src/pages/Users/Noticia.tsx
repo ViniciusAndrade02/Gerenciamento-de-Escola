@@ -13,6 +13,7 @@ const Noticia = () => {
           titulo={item.titulo}
           dataPublicacao={item.dataPublicacao}
           imagemUrl={item.imagemUrl}
+
         />
       ))}
       {isLoading && <p>Carregando...</p>}

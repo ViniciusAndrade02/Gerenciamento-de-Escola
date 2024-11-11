@@ -76,7 +76,7 @@ const IndexRouter = createBrowserRouter(
       <Route element={<ProtectedRoute role={["ADMIN"]} />}>
         <Route path="/admin" element={<Navegacao />}>
           <Route index element={<Turma />} />
-          <Route path="noticia" element={<NoticiaAdmin />} />
+          <Route path="noticia/:id?" element={<NoticiaAdmin />} />
           <Route path="cadastrar" element={<Cadastrar />} />
         </Route>
       </Route>

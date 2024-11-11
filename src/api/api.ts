@@ -36,3 +36,5 @@ export const getCardapio = async (token: string | null): AxiosPromise<CardapioRe
   });
   return response;
 }
+
+// export const getInformationUser = async (token:)

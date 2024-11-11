@@ -14,6 +14,6 @@ export function useNoticia() {
 
   return {
     ...query,
-    data: query.data?.data, // Extrai os dados da resposta para acesso mais fácil
+    data: query.data?.data, // Extrai os dados 
   };
 }
