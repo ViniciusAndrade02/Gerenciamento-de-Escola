@@ -4,13 +4,14 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate, useParams } from "react-router-dom";
+import NoticiaEdit from "./NoticiaEdit";
 
 interface NoticiaCard {
   titulo: string;
   conteudo: string;
   dataPublicacao: string;
   imagemUrl: string;
-  idNoticia?: number;
+  idNoticia: string;
 }
 
 const NoticiaCard = ({
@@ -62,6 +63,16 @@ const NoticiaCard = ({
           </div>
         )}
       </div>
+
+      {id && (
+        <NoticiaEdit
+          conteudo={conteudo}
+          dataPublicacao={dataPublicacao}
+          imagemUrl={imagemUrl}
+          titulo={titulo}
+          idNoticia={idNoticia}
+        />
+      )}
     </>
   );
 };

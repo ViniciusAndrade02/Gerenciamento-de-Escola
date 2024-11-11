@@ -1,13 +1,10 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import NoticiaCard from "../../components/Elements/NoticiaCard";
 import { useNoticia } from "../../hooks/Response/Noticias";
-import { useEffect } from "react";
 
 const NoticiaAdmin = () => {
   const { data, isLoading } = useNoticia();
-  const location = useLocation();
   const { id } = useParams();
-  console.log(location.pathname);
 
   return (
     <>
@@ -26,8 +23,6 @@ const NoticiaAdmin = () => {
             />
           ))}
       {isLoading && <p>Carregando...</p>}
-
-      
     </>
   );
 };
