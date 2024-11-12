@@ -18,7 +18,7 @@ const NoticiaEdit = ({
   conteudo,
   dataPublicacao,
   imagemUrl,
-  idNoticia
+  idNoticia,
 }: NoticiaEdit) => {
   const { user } = useContext(AuthContext);
   const [editNoticia, setEditNoticia] = useState({
@@ -29,23 +29,31 @@ const NoticiaEdit = ({
     imagemUrl: imagemUrl,
   });
   const { mutate } = useUpdateNoticia({ idNoticia, data: editNoticia });
-  
+
   async function editNoticiaId(event: FormEvent) {
     event.preventDefault();
     if (
       editNoticia.titulo === titulo &&
-      editNoticia.conteudo === conteudo &&
-      editNoticia.dataPublicacao === imagemUrl &&
-      editNoticia.imagemUrl === imagemUrl
+      editNoticia.conteudo == conteudo &&
+      editNoticia.dataPublicacao == dataPublicacao &&
+      editNoticia.imagemUrl == imagemUrl
     ) {
       alert("Por favor,altere algo para alterar");
     } else {
-      mutate()
+      mutate();
     }
-
   }
 
-
+  function handleChange(event:any) {
+    const file = event.target.files[0];
+    if (file) {
+      const imagemUrl = URL.createObjectURL(file);
+      setEditNoticia({
+        ...editNoticia,
+        imagemUrl,
+      });
+    }
+  }
 
   const renderImagePreview = () => {
     if (editNoticia.imagemUrl) {
@@ -140,7 +148,13 @@ const NoticiaEdit = ({
             ) : (
               "Upload Imagem"
             )}
-            <input type="file" accept="image/png" hidden name="img" />
+            <input
+              type="file"
+              accept="image/png"
+              onChange={handleChange}
+              hidden
+              name="img"
+            />
           </Button>
         </div>
 

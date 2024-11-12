@@ -46,7 +46,7 @@ const NoticiaCard = ({
             Admin ? "hover:opacity-75 group-hover:opacity-75" : "opacity-100"
           }`}
         >
-          <img className="w-auto h-30 object-cover" src={imagemUrl} alt="" />
+          <img className="w-auto h-[25rem] object-cover" src={imagemUrl} alt="" />
 
           <div className="flex justify-between px-2 mt-2">
             <h1 className="text-xl">{titulo}</h1>
