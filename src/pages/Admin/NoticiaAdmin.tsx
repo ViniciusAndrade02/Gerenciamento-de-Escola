@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NoticiaCard from "../../components/Elements/NoticiaCard";
 import { useNoticia } from "../../hooks/Response/Noticias";
 import NoticiaCreate from "../../components/Elements/NoticiaCreate";

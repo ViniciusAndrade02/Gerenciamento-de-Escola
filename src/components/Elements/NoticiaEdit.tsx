@@ -3,13 +3,12 @@ import { FormEvent, useContext, useState } from "react";
 import { useUpdateNoticia } from "../../hooks/Response/UpdateNoticia";
 import { AuthContext } from "../../context/Auth";
 import axios from "axios";
-import { PutNoticiaResponse } from "../../api/InterfaceApi";
 
 interface NoticiaEdit {
   titulo: string;
   conteudo: string;
   dataPublicacao: string;
-  imagemUrl: string;
+  imagemUrl: any;
   idNoticia: string;
 }
 
@@ -20,7 +19,7 @@ const NoticiaEdit = ({
   imagemUrl,
   idNoticia,
 }: NoticiaEdit) => {
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const [editNoticia, setEditNoticia] = useState({
     usuarioId: user.id,
     titulo: titulo,
@@ -28,6 +27,7 @@ const NoticiaEdit = ({
     dataPublicacao: dataPublicacao,
     imagemUrl: imagemUrl,
   });
+  console.log(editNoticia.imagemUrl);
   const { mutate } = useUpdateNoticia({ idNoticia, data: editNoticia });
 
   async function editNoticiaId(event: FormEvent) {
@@ -40,14 +40,32 @@ const NoticiaEdit = ({
     ) {
       alert("Por favor,altere algo para alterar");
     } else {
-      mutate();
+      // mutate();
+
+      try {
+        await axios.put(
+          `http://44.223.188.239:8080/noticias/${idNoticia}`,
+          editNoticia,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message);
+        } else {
+          throw new Error("An unknown error occurred");
+        }
+      }
     }
   }
 
-  function handleChange(event:any) {
+  function handleChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const imagemUrl = URL.createObjectURL(file);
+      const imagemUrl = file;
       setEditNoticia({
         ...editNoticia,
         imagemUrl,

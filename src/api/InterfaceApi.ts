@@ -2,7 +2,7 @@ export interface NoticiaResponse {
   id?: string | null;
   titulo: string;
   conteudo: string;
-  imagemUrl: string;
+  imagemUrl: any;
   dataPublicacao: any;
 }
 
@@ -10,7 +10,7 @@ export interface PutNoticiaResponse {
   titulo: string;
   conteudo: string;
   dataPublicacao: any;
-  imagemUrl: string;
+  imagemUrl: any;
   usuarioId: string | null;
 }
 
