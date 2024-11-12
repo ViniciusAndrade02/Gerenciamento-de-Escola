@@ -1,6 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
 import NoticiaCard from "../../components/Elements/NoticiaCard";
 import { useNoticia } from "../../hooks/Response/Noticias";
+import NoticiaCreate from "../../components/Elements/NoticiaCreate";
 
 const NoticiaAdmin = () => {
   const { data, isLoading } = useNoticia();
@@ -8,6 +9,7 @@ const NoticiaAdmin = () => {
 
   return (
     <>
+    <NoticiaCreate/>
       {!isLoading &&
         data &&
         Object.values(data)
