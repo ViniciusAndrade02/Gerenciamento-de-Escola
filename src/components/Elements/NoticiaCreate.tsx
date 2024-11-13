@@ -9,11 +9,8 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AuthContext } from "../../context/Auth"; // Ajuste o caminho conforme necessário
-import axios from "axios";
 import { usePostNoticia } from "../../hooks/Response/PostCardapio";
 
-// URL base da API
-const baseUrl = "http://44.223.188.239:8080";
 
 // Esquema de validação com yup
 const schema = yup.object().shape({
@@ -60,11 +57,7 @@ const NoticiaCreate = () => {
     if (createNoticia.imagemUrl) {
       formData.append("file", createNoticia.imagemUrl);
     }
-
     formData.append("usuarioId", String(user.id));
-    for (let [_, value] of formData.entries()) {
-      console.log(value);
-    }
     mutate(formData)
   
   };
@@ -90,7 +83,7 @@ const NoticiaCreate = () => {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button sx={{marginBottom:'10px'}} variant="outlined" onClick={handleClickOpen}>
         Criar Notícia
       </Button>
       <Dialog

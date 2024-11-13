@@ -45,6 +45,15 @@ export const putNoticia = async (idNoticia:string,token:any,data:PutNoticiaRespo
     return response
 }
 
+export const deleteNoticia = async (token:any,idNoticia:string):AxiosPromise<any> => {
+  const response = await axios.delete<any>(`${baseUrl}/noticias/${idNoticia}`,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response
+}
+
 
 export const getCardapio = async (token: string | null): AxiosPromise<CardapioResponse> => {
   const response = await axios.get<CardapioResponse>(`${baseUrl}/cardapio`,{

@@ -40,25 +40,8 @@ const NoticiaEdit = ({
     ) {
       alert("Por favor,altere algo para alterar");
     } else {
-      // mutate();
+      mutate();
 
-      try {
-        await axios.put(
-          `http://44.223.188.239:8080/noticias/${idNoticia}`,
-          editNoticia,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new Error(error.message);
-        } else {
-          throw new Error("An unknown error occurred");
-        }
-      }
     }
   }
 
@@ -75,6 +58,15 @@ const NoticiaEdit = ({
 
   const renderImagePreview = () => {
     if (editNoticia.imagemUrl) {
+      if (editNoticia.imagemUrl instanceof Blob) {
+        return (
+          <img
+            src={URL.createObjectURL(editNoticia.imagemUrl)}
+            alt="Preview"
+            className="w-screen h-full object-cover absolute rounded-xl"
+          />
+        );
+      }
       return (
         <img
           src={editNoticia.imagemUrl}
@@ -83,9 +75,9 @@ const NoticiaEdit = ({
         />
       );
     }
+
     return null;
   };
-
   return (
     <>
       <Divider textAlign="left"></Divider>
@@ -106,7 +98,7 @@ const NoticiaEdit = ({
               }))
             }
           />
-          <label className="py-1" htmlFor="responsavel">
+          {/* <label className="py-1" htmlFor="responsavel">
             Data
           </label>
           <TextField
@@ -119,7 +111,7 @@ const NoticiaEdit = ({
                 dataPublicacao: event.target.value,
               }))
             }
-          />
+          /> */}
         </div>
 
         <div className="flex flex-col ">
