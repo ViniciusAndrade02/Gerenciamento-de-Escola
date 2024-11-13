@@ -1,6 +1,5 @@
-
 import { Outlet } from "react-router-dom";
-import NavegationAll from "../Elements/NavegationAll";
+import NavegationAll from "../Elements/Navegation/NavegationAll";
 
 const Navegacao = () => {
   return (

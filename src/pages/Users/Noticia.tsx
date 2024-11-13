@@ -1,23 +1,23 @@
-import NoticiaCard from "../../components/Elements/NoticiaCard";
-import { useNoticia } from "../../hooks/Response/Noticias";
+import NoticiaCard from "../../components/Elements/Noticia/NoticiaCard";
+import { useNoticia } from "../../hooks/Response/NoticiaHook/Noticias";
 
 const Noticia = () => {
   const { data, isLoading } = useNoticia();
 
   return (
     <>
-      {!isLoading && data && Object.values(data).map((item, index) => (
-        <NoticiaCard
-          key={index}
-          conteudo={item.conteudo}
-          titulo={item.titulo}
-          dataPublicacao={item.dataPublicacao}
-          imagemUrl={item.imagemUrl}
-          idNoticia=""
-
-
-        />
-      ))}
+      {!isLoading &&
+        data &&
+        Object.values(data).map((item, index) => (
+          <NoticiaCard
+            key={index}
+            conteudo={item.conteudo}
+            titulo={item.titulo}
+            dataPublicacao={item.dataPublicacao}
+            imagemUrl={item.imagemUrl}
+            idNoticia=""
+          />
+        ))}
       {isLoading && <p>Carregando...</p>}
     </>
   );

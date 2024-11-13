@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
-import { AuthContext } from "../../context/Auth";
-import { postNoticia } from "../../api/api";
+import { AuthContext } from "../../../context/Auth";
+import { postNoticia } from "../../../api/api";
 
-export function usePostNoticia(){
-  const queryClient = useQueryClient()
-  const {token} =useContext(AuthContext);
+export function usePostNoticia() {
+  const queryClient = useQueryClient();
+  const { token } = useContext(AuthContext);
 
   const mutation = useMutation({
     mutationFn: (formData: any) => {
@@ -18,10 +18,9 @@ export function usePostNoticia(){
       queryClient.invalidateQueries({
         queryKey: ["noticia-data"],
       });
-      console.log('DEU CERTO')
+      console.log("DEU CERTO");
     },
-  })
+  });
 
-  return mutation
-
+  return mutation;
 }

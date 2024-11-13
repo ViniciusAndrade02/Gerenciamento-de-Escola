@@ -13,7 +13,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/Auth";
+import { AuthContext } from "../../../context/Auth";
 import { Admin, Menu, Route } from "./NavegationState";
 
 const NavegationAll = () => {

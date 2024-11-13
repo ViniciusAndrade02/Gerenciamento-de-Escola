@@ -8,24 +8,20 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AuthContext } from "../../context/Auth"; // Ajuste o caminho conforme necessário
-import { usePostNoticia } from "../../hooks/Response/PostCardapio";
-
+import { AuthContext } from "../../../context/Auth"; // Ajuste o caminho conforme necessário
+import { usePostNoticia } from "../../../hooks/Response/NoticiaHook/PostCardapio";
 
 // Esquema de validação com yup
 const schema = yup.object().shape({
   titulo: yup.string().required("O título é obrigatório"),
   conteudo: yup.string().required("O conteúdo é obrigatório"),
-  imagemUrl: yup
-  .mixed<any>()
-  .nullable()
-  .required("A imagem é obrigatória"),
+  imagemUrl: yup.mixed<any>().nullable().required("A imagem é obrigatória"),
 });
 
 const NoticiaCreate = () => {
   const { token, user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const {mutate} = usePostNoticia()
+  const { mutate } = usePostNoticia();
   const [createNoticia, setCreateNoticia] = useState({
     titulo: "",
     conteudo: "",
@@ -45,12 +41,12 @@ const NoticiaCreate = () => {
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSend = async (data:any) => {
+  const handleSend = async (data: any) => {
     if (!token) {
       console.error("Token não disponível");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("titulo", data.titulo);
     formData.append("conteudo", data.conteudo);
@@ -58,13 +54,10 @@ const NoticiaCreate = () => {
       formData.append("file", createNoticia.imagemUrl);
     }
     formData.append("usuarioId", String(user.id));
-    mutate(formData)
-  
+    mutate(formData);
   };
-  
-  
 
-  const handleChange = (event:any) => {
+  const handleChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
       setValue("imagemUrl", file, { shouldValidate: true });
@@ -83,7 +76,11 @@ const NoticiaCreate = () => {
 
   return (
     <>
-      <Button sx={{marginBottom:'10px'}} variant="outlined" onClick={handleClickOpen}>
+      <Button
+        sx={{ marginBottom: "10px" }}
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         Criar Notícia
       </Button>
       <Dialog
@@ -97,7 +94,11 @@ const NoticiaCreate = () => {
           <Typography variant="h6">Criar Uma Notícia:</Typography>
         </DialogTitle>
         <DialogContent>
-          <Box component="form" onSubmit={handleSubmit(handleSend)} sx={{ display: "flex", flexDirection: "column" }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(handleSend)}
+            sx={{ display: "flex", flexDirection: "column" }}
+          >
             <Typography className="py-1" component="label" htmlFor="titulo">
               Título
             </Typography>
@@ -164,7 +165,6 @@ const NoticiaCreate = () => {
                 name="imagemUrl"
               />
             </Button>
-
           </Box>
         </DialogContent>
         <DialogActions>

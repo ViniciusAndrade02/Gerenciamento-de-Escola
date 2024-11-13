@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import NoticiaCard from "../../components/Elements/NoticiaCard";
-import { useNoticia } from "../../hooks/Response/Noticias";
-import NoticiaCreate from "../../components/Elements/NoticiaCreate";
+import NoticiaCard from "../../components/Elements/Noticia/NoticiaCard";
+import { useNoticia } from "../../hooks/Response/NoticiaHook/Noticias";
+import NoticiaCreate from "../../components/Elements/Noticia/NoticiaCreate";
 
 const NoticiaAdmin = () => {
   const { data, isLoading } = useNoticia();
@@ -9,7 +9,7 @@ const NoticiaAdmin = () => {
 
   return (
     <>
-    {!id && <NoticiaCreate/>}
+      {!id && <NoticiaCreate />}
       {!isLoading &&
         data &&
         Object.values(data)

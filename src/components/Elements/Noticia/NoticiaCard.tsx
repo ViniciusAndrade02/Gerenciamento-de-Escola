@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/Auth";
+import { AuthContext } from "../../../context/Auth";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -33,8 +33,8 @@ const NoticiaCard = ({
   };
 
   const deleteNoticia = () => {
-    setAbrirDeletar(true)
-  }
+    setAbrirDeletar(true);
+  };
 
   return (
     <>
@@ -52,7 +52,11 @@ const NoticiaCard = ({
             Admin ? "hover:opacity-75 group-hover:opacity-75" : "opacity-100"
           }`}
         >
-          <img className="w-auto h-[25rem] object-cover" src={imagemUrl} alt="" />
+          <img
+            className="w-auto h-[25rem] object-cover"
+            src={imagemUrl}
+            alt=""
+          />
 
           <div className="flex justify-between px-2 mt-2">
             <h1 className="text-xl">{titulo}</h1>
@@ -65,12 +69,16 @@ const NoticiaCard = ({
         {Admin && !id && (
           <div className="flex flex-row bg-slate-100 rounded-lg p-2 m-2 absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <EditNoteIcon className="cursor-pointer" onClick={showNoticia} />
-            <DeleteIcon className="cursor-pointer" onClick={deleteNoticia}/>
+            <DeleteIcon className="cursor-pointer" onClick={deleteNoticia} />
           </div>
         )}
       </div>
 
-      <NoticiaDelete abrirDelete={abrirDeletar} setAbrirDelete={setAbrirDeletar} idNoticia={idNoticia}/>
+      <NoticiaDelete
+        abrirDelete={abrirDeletar}
+        setAbrirDelete={setAbrirDeletar}
+        idNoticia={idNoticia}
+      />
 
       {id && (
         <NoticiaEdit

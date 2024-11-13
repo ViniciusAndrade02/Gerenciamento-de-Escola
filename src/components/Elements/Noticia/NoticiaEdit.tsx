@@ -1,7 +1,7 @@
 import { Box, Button, Divider, TextField } from "@mui/material";
 import { FormEvent, useContext, useState } from "react";
-import { useUpdateNoticia } from "../../hooks/Response/UpdateNoticia";
-import { AuthContext } from "../../context/Auth";
+import { useUpdateNoticia } from "../../../hooks/Response/NoticiaHook/UpdateNoticia";
+import { AuthContext } from "../../../context/Auth";
 import axios from "axios";
 
 interface NoticiaEdit {
@@ -41,7 +41,6 @@ const NoticiaEdit = ({
       alert("Por favor,altere algo para alterar");
     } else {
       mutate();
-
     }
   }
 

@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
-import { AuthContext } from "../../context/Auth";
-import { NoticiaResponse } from "../../api/InterfaceApi";
-import { putNoticia } from "../../api/api";
+import { AuthContext } from "../../../context/Auth";
+import { NoticiaResponse } from "../../../api/InterfaceApi";
+import { putNoticia } from "../../../api/api";
 
 interface useUpdateNoticia {
-  idNoticia: string ;
+  idNoticia: string;
   data: any;
 }
 
@@ -18,7 +18,9 @@ export function useUpdateNoticia({ idNoticia, data }: useUpdateNoticia) {
       if (!token) {
         throw new Error("TOKEN NÃO ENCONTRADO");
       }
-      return putNoticia(idNoticia,token, data).then((response) => response.data);
+      return putNoticia(idNoticia, token, data).then(
+        (response) => response.data
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

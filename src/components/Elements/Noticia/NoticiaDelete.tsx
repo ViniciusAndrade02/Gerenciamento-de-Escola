@@ -4,7 +4,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useNoticiaDelete } from "../../hooks/Response/NoticiaDelete";
+import { useNoticiaDelete } from "../../../hooks/Response/NoticiaHook/NoticiaDelete";
 
 interface NoticiaDelete {
   abrirDelete: boolean;
@@ -17,20 +17,18 @@ const NoticiaDelete = ({
   setAbrirDelete,
   idNoticia,
 }: NoticiaDelete) => {
-
-  const {mutate,isSuccess} = useNoticiaDelete()
+  const { mutate, isSuccess } = useNoticiaDelete();
   const handleClose = () => {
     setAbrirDelete(false);
   };
 
   const deletarNoticia = () => {
-    mutate(idNoticia)
-    if(!isSuccess){
-      handleClose()
-      alert('Deletado com Sucesso')
+    mutate(idNoticia);
+    if (!isSuccess) {
+      handleClose();
+      alert("Deletado com Sucesso");
     }
   };
-
 
   return (
     <>
