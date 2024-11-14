@@ -19,3 +19,17 @@ export interface CardapioResponse {
   diaSemana: string;
   conteudo: string;
 }
+
+interface Aluno{
+  id:string,
+  nome:string,
+  dataNascimento:string,
+  matricula:string
+}
+
+export interface GetTurmasResponse{
+  id:string,
+  nome:string,
+  descricao:string
+  alunos:Aluno[]
+}

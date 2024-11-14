@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from "axios";
-import { CardapioResponse, NoticiaResponse, PutNoticiaResponse } from "./InterfaceApi";
+import { CardapioResponse, GetTurmasResponse, NoticiaResponse, PutNoticiaResponse } from "./InterfaceApi";
 
 const baseUrl = "http://44.223.188.239:8080";
 
@@ -51,6 +51,15 @@ export const deleteNoticia = async (token:any,idNoticia:string):AxiosPromise<any
       Authorization: `Bearer ${token}`,
     },
   });
+  return response
+}
+
+export const getTurma = async (token:string | null):AxiosPromise<GetTurmasResponse> => {
+  const response = await axios.get<GetTurmasResponse>(`${baseUrl}/turmas`,{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  })
   return response
 }
 
