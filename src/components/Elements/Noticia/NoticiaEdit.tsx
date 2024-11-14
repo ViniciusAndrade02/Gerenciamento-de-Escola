@@ -2,7 +2,6 @@ import { Box, Button, Divider, TextField } from "@mui/material";
 import { FormEvent, useContext, useState } from "react";
 import { useUpdateNoticia } from "../../../hooks/Response/NoticiaHook/UpdateNoticia";
 import { AuthContext } from "../../../context/Auth";
-import axios from "axios";
 
 interface NoticiaEdit {
   titulo: string;
@@ -19,7 +18,7 @@ const NoticiaEdit = ({
   imagemUrl,
   idNoticia,
 }: NoticiaEdit) => {
-  const { user, token } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [editNoticia, setEditNoticia] = useState({
     usuarioId: user.id,
     titulo: titulo,

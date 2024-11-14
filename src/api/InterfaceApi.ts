@@ -20,7 +20,7 @@ export interface CardapioResponse {
   conteudo: string;
 }
 
-interface Aluno{
+export interface Alunos{
   id:string,
   nome:string,
   dataNascimento:string,
@@ -31,5 +31,5 @@ export interface GetTurmasResponse{
   id:string,
   nome:string,
   descricao:string
-  alunos:Aluno[]
+  alunos:Alunos[]
 }
