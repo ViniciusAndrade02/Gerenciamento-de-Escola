@@ -20,16 +20,24 @@ export interface CardapioResponse {
   conteudo: string;
 }
 
-export interface Alunos{
-  id:string,
-  nome:string,
-  dataNascimento:string,
-  matricula:string
+export interface Alunos {
+  id: string;
+  nome: string;
+  dataNascimento: string;
+  matricula: string;
 }
 
-export interface GetTurmasResponse{
-  id:string,
-  nome:string,
-  descricao:string
-  alunos:Alunos[]
+export interface GetTurmasResponse {
+  id: string;
+  nome: string;
+  descricao: string;
+  alunos: Alunos[];
+}
+
+export interface PostUsuarioResponse {
+  nome: string;
+  telefone: string;
+  email: string;
+  password: string;
+  role: string;
 }
