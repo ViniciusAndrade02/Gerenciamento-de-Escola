@@ -54,13 +54,13 @@ const NavegationAll = () => {
   };
 
   useEffect(() => {
-    const urlStage = location.pathname.split("/")[2];
-    if (urlStage === undefined) {
-      setPagination(route.namePage[0]);
-    } else if (urlStage === "cardapio" || "noticia") {
+    const urlStageOne = location.pathname.split("/")[1];
+    const urlStageTwo = location.pathname.split("/")[2];
+
+    if(urlStageTwo == route.nameNavegation[1].toLowerCase() && urlStageTwo != undefined){
       setPagination(route.namePage[1]);
-    } else {
-      setPagination(route.namePage[2]);
+    }else if(urlStageOne == route.urlDefault){
+      setPagination(route.namePage[0]);
     }
   }, [location.pathname]);
 

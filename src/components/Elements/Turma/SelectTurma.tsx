@@ -1,4 +1,3 @@
-import React from "react";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Alunos } from "../../../api/InterfaceApi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,20 +26,22 @@ const SelectTurma = ({ alunosTurma }: SelectTurma) => {
           </p>
         ) : (
           alunosTurma?.map((item, index) => (
-            <div
-              key={index}
-              className="mb-4 p-4 border border-gray-300 rounded-md bg-white shadow-sm"
-            >
-              <h1 className="text-xl font-semibold text-gray-800">
-                {item.nome}
-              </h1>
-              <p className="text-sm text-gray-600">
-                Matrícula: {item.matricula}
-              </p>
-              <p className="text-sm text-gray-600">
-                Data de Nascimento: {item.dataNascimento}
-              </p>
-            </div>
+            <>
+              <div
+                key={index}
+                className="mb-4 p-4 border border-gray-300 rounded-md bg-white shadow-sm"
+              >
+                <h1 className="text-xl font-semibold text-gray-800">
+                  {item.nome}
+                </h1>
+                <p className="text-sm text-gray-600">
+                  Matrícula: {item.matricula}
+                </p>
+                <p className="text-sm text-gray-600">
+                  Data de Nascimento: {item.dataNascimento}
+                </p>
+              </div>
+            </>
           ))
         )}
       </div>
