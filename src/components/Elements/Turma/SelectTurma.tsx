@@ -1,6 +1,7 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Alunos } from "../../../api/InterfaceApi";
 import { useNavigate, useParams } from "react-router-dom";
+import CriarAluno from "./CriarAluno";
 
 interface SelectTurma {
   alunosTurma?: Alunos[];
@@ -12,11 +13,15 @@ const SelectTurma = ({ alunosTurma }: SelectTurma) => {
   return (
     <>
       {id && (
-        <KeyboardBackspaceIcon
-          fontSize="large"
-          className="cursor-pointer my-2 "
-          onClick={() => navigate("/admin/")}
-        />
+        <>
+          <KeyboardBackspaceIcon
+            fontSize="large"
+            className="cursor-pointer my-2 "
+            onClick={() => navigate("/admin/")}
+          />
+
+          <CriarAluno/>
+        </>
       )}
 
       <div className="p-6 bg-gray-100 rounded-lg shadow-md">
