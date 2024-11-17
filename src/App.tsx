@@ -18,6 +18,12 @@ import { AuthContext } from "./context/Auth";
 import NoticiaAdmin from "./pages/Admin/NoticiaAdmin";
 import Cadastrar from "./pages/Admin/Cadastrar";
 
+import { database } from "./firebase";
+import { ref, set as setData, onValue } from "firebase/database";
+
+import { useEffect, useState } from "react";
+
+// Rota protegida para validar permissões
 const ProtectedRoute = ({ role }: any) => {
   const { user } = useContext(AuthContext);
 
@@ -36,6 +42,7 @@ const ProtectedRoute = ({ role }: any) => {
   return <Outlet />;
 };
 
+// Rota pública para login e redirecionamentos
 const PublicRoute = ({ children }: any) => {
   const { user } = useContext(AuthContext);
 
@@ -52,7 +59,7 @@ const PublicRoute = ({ children }: any) => {
   return children;
 };
 
-// Definindo o roteamento
+// Configuração do roteamento
 const IndexRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -85,7 +92,40 @@ const IndexRouter = createBrowserRouter(
 );
 
 const App = () => {
-  return <RouterProvider router={IndexRouter} />;
+  const [messages, setMessages] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Referência no Firebase para o nó "messages"
+    const messagesRef = ref(database, "messages/");
+
+    // Escreve dados no Realtime Database
+    setData(messagesRef, {
+      message1: "Olá, Firebase!",
+      message2: "Teste de conexão funcionando.",
+    }).catch((error) => console.error("Erro ao escrever no Firebase:", error));
+
+    // Lê dados do Realtime Database
+    onValue(messagesRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setMessages(Object.values(data));
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <RouterProvider router={IndexRouter} />
+      <div>
+        <h2>Mensagens do Firebase:</h2>
+        <ul>
+          {messages.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
 };
 
 export default App;
