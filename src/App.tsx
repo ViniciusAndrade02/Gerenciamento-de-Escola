@@ -22,6 +22,7 @@ import { database } from "./firebase";
 import { ref, set as setData, onValue } from "firebase/database";
 
 import { useEffect, useState } from "react";
+import Chat from "./Chat";
 
 // Rota protegida para validar permissões
 const ProtectedRoute = ({ role }: any) => {
@@ -117,13 +118,9 @@ const App = () => {
     <>
       <RouterProvider router={IndexRouter} />
       <div>
-        <h2>Mensagens do Firebase:</h2>
-        <ul>
-          {messages.map((msg, index) => (
-            <li key={index}>{msg}</li>
-          ))}
-        </ul>
-      </div>
+      <h1>Bate-Papo Escolar</h1>
+      <Chat chatId="chat1" />
+    </div>
     </>
   );
 };

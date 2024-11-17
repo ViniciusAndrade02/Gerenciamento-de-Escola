@@ -1,0 +1,32 @@
+{
+  "chats": {
+    "chat1": {
+      "participants": {
+        "user1Id": true,
+        "user2Id": true
+      },
+      "messages": {
+        "msg1": {
+          "sender": "user1Id",
+          "content": "Olá, professor!",
+          "timestamp": 1234567890
+        },
+        "msg2": {
+          "sender": "user2Id",
+          "content": "Olá! Como posso ajudar?",
+          "timestamp": 1234567891
+        }
+      }
+    }
+  },
+  "users": {
+    "user1Id": {
+      "name": "Pai João",
+      "role": "PAI"
+    },
+    "user2Id": {
+      "name": "Professor Maria",
+      "role": "PROFESSOR"
+    }
+  }
+}
