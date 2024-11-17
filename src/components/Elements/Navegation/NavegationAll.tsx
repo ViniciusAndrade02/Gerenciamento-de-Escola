@@ -12,56 +12,56 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FeedIcon from "@mui/icons-material/Feed";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ChatIcon from "@mui/icons-material/Chat";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/Auth";
-import { Admin, Menu, Route } from "./NavegationState";
+
+// Estruturas de navegação
+const Admin = {
+  urlDefault: "admin",
+  urls: ["noticia", "cardapio", "chat"],
+  namePage: ["Notícias", "Cardápio", "Bate-Papo"],
+  nameNavegation: ["Notícias", "Cardápio", "Bate-Papo", "Sair"],
+};
+
+const Menu = {
+  urlDefault: "menu",
+  urls: ["perfil", "chat"],
+  namePage: ["Perfil", "Bate-Papo"],
+  nameNavegation: ["Notícias", "Perfil", "Bate-Papo", "Sair"],
+};
 
 const NavegationAll = () => {
   const { user, logout } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [pagination, setPagination] = useState<string>();
+  const [pagination, setPagination] = useState<string>("");
 
-  const navegate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
-  const [route] = useState<Route>(
-    user.role === "ADMIN"
-      ? Admin
-      : user.role === "PAI"
-      ? Menu
-      : { urlDefault: "", urls: [], namePage: [], nameNavegation: [] }
-  );
+  const route = user.role === "ADMIN" ? Admin : Menu; // Define rota com base no papel do usuário
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
-  const Page = (index: number) => {
-    route.nameNavegation.map((_, b): any => {
-      if (index == 0) {
-        return navegate("/" + route.urlDefault);
-      }
-
-      if (index == route.nameNavegation.length - 1) {
-        logout();
-        return navegate("/");
-      }
-
-      if (b == index) {
-        return navegate("/" + route.urlDefault + "/" + route.urls[b - 1]);
-      }
-    });
+  const handleNavigation = (index: number) => {
+    if (index === route.nameNavegation.length - 1) {
+      logout();
+      navigate("/"); // Redireciona para o login após logout
+    } else if (index === 0) {
+      navigate(`/${route.urlDefault}`);
+    } else {
+      navigate(`/${route.urlDefault}/${route.urls[index - 1]}`);
+    }
   };
 
   useEffect(() => {
-    const urlStageOne = location.pathname.split("/")[1];
-    const urlStageTwo = location.pathname.split("/")[2];
+    const pathArray = location.pathname.split("/");
+    const currentPage = pathArray[pathArray.length - 1];
 
-    if(urlStageTwo == route.nameNavegation[1].toLowerCase() && urlStageTwo != undefined){
-      setPagination(route.namePage[1]);
-    }else if(urlStageOne == route.urlDefault){
-      setPagination(route.namePage[0]);
-    }
+    const pageIndex = route.urls.indexOf(currentPage);
+    setPagination(route.namePage[pageIndex] || route.namePage[0]);
   }, [location.pathname]);
 
   const DrawerList = (
@@ -70,12 +70,14 @@ const NavegationAll = () => {
       <List>
         {route.nameNavegation.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton onClick={() => Page(index)}>
+            <ListItemButton onClick={() => handleNavigation(index)}>
               <ListItemIcon>
                 {index === 0 ? (
                   <FeedIcon />
                 ) : index === 1 ? (
                   <RestaurantMenuIcon />
+                ) : index === 2 ? (
+                  <ChatIcon />
                 ) : (
                   <AccountCircleIcon />
                 )}

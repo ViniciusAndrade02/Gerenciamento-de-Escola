@@ -17,14 +17,8 @@ import { useContext } from "react";
 import { AuthContext } from "./context/Auth";
 import NoticiaAdmin from "./pages/Admin/NoticiaAdmin";
 import Cadastrar from "./pages/Admin/Cadastrar";
+import ChatApp from "./components/chat/ChatApp";
 
-import { database } from "./firebase";
-import { ref, set as setData, onValue } from "firebase/database";
-
-import { useEffect, useState } from "react";
-import Chat from "./Chat";
-
-// Rota protegida para validar permissões
 const ProtectedRoute = ({ role }: any) => {
   const { user } = useContext(AuthContext);
 
@@ -43,7 +37,6 @@ const ProtectedRoute = ({ role }: any) => {
   return <Outlet />;
 };
 
-// Rota pública para login e redirecionamentos
 const PublicRoute = ({ children }: any) => {
   const { user } = useContext(AuthContext);
 
@@ -53,14 +46,11 @@ const PublicRoute = ({ children }: any) => {
     ) : (
       <Navigate to="/menu" replace />
     );
-  } else {
-    <Navigate to="/" replace />;
   }
 
   return children;
 };
 
-// Configuração do roteamento
 const IndexRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -78,6 +68,7 @@ const IndexRouter = createBrowserRouter(
           <Route index element={<Noticia />} />
           <Route path="cardapio" element={<Cardápio />} />
           <Route path="perfil" element={<Perfil />} />
+          <Route path="chat" element={<ChatApp />} />
         </Route>
       </Route>
 
@@ -86,6 +77,7 @@ const IndexRouter = createBrowserRouter(
           <Route index element={<Turma />} />
           <Route path="noticia/:id?" element={<NoticiaAdmin />} />
           <Route path="cadastrar" element={<Cadastrar />} />
+          <Route path="chat" element={<ChatApp />} />
         </Route>
       </Route>
     </Route>
@@ -93,36 +85,7 @@ const IndexRouter = createBrowserRouter(
 );
 
 const App = () => {
-  const [messages, setMessages] = useState<string[]>([]);
-
-  useEffect(() => {
-    // Referência no Firebase para o nó "messages"
-    const messagesRef = ref(database, "messages/");
-
-    // Escreve dados no Realtime Database
-    setData(messagesRef, {
-      message1: "Olá, Firebase!",
-      message2: "Teste de conexão funcionando.",
-    }).catch((error) => console.error("Erro ao escrever no Firebase:", error));
-
-    // Lê dados do Realtime Database
-    onValue(messagesRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setMessages(Object.values(data));
-      }
-    });
-  }, []);
-
-  return (
-    <>
-      <RouterProvider router={IndexRouter} />
-      <div>
-      <h1>Bate-Papo Escolar</h1>
-      <Chat chatId="chat1" />
-    </div>
-    </>
-  );
+  return <RouterProvider router={IndexRouter} />;
 };
 
 export default App;
