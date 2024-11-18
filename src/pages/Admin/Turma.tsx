@@ -8,11 +8,13 @@ import SelectTurma from "../../components/Elements/Turma/SelectTurma";
 const Turma = () => {
   const { data, isLoading } = useTurmas();
   const [alunosTurma, setAlunosTurma] = useState<Alunos[] | undefined>([]); 
+  const [idTurmaSelect,setIdTurmaSelect] = useState<string>('')
   const { id } = useParams();
   const navigate = useNavigate();
   
   const buscarTurma = (idTurma: string, alunos: Alunos[]) => {
     navigate(`/admin/${idTurma}`);
+    setIdTurmaSelect(idTurma)
     setAlunosTurma(alunos);  
   };
 
@@ -46,7 +48,7 @@ const Turma = () => {
         </div>
       )}
 
-      {id && <SelectTurma alunosTurma={alunosTurma}/>}
+      {id && <SelectTurma alunosTurma={alunosTurma} idTurma={idTurmaSelect}/>}
     </>
   );
 };

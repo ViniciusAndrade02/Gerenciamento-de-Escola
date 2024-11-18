@@ -34,7 +34,16 @@ export interface GetTurmasResponse {
   alunos: Alunos[];
 }
 
-export interface PostUsuarioResponse {
+export interface PostAlunosTurmaEspecifica{
+  nome:string,
+  dataNascimento:string,
+  matricula:string,
+  turmaId:string,
+  paiId:string
+}
+
+export interface UsuarioResponse {
+  id?:string
   nome: string;
   telefone: string;
   email: string;

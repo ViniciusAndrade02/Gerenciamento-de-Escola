@@ -16,7 +16,7 @@ import { AuthContext } from "../../context/Auth";
 
 // Schema de validação com Yup
 const validationSchema = yup.object().shape({
-  email: yup.string().email("Email inválido").required("O email é obrigatório"),
+  email: yup.string().required("O email é obrigatório"),
   password: yup
     .string()
     .min(6, "A senha deve ter pelo menos 6 caracteres")

@@ -5,9 +5,10 @@ import CriarAluno from "./CriarAluno";
 
 interface SelectTurma {
   alunosTurma?: Alunos[];
+  idTurma:string
 }
 
-const SelectTurma = ({ alunosTurma }: SelectTurma) => {
+const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
   const { id } = useParams();
   const navigate = useNavigate();
   return (
@@ -20,7 +21,7 @@ const SelectTurma = ({ alunosTurma }: SelectTurma) => {
             onClick={() => navigate("/admin/")}
           />
 
-          <CriarAluno/>
+          <CriarAluno turmaId={idTurma}/>
         </>
       )}
 

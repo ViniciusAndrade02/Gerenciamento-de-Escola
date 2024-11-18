@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from "axios";
-import { CardapioResponse, GetTurmasResponse, NoticiaResponse, PutNoticiaResponse,PostUsuarioResponse } from "./InterfaceApi";
+import { CardapioResponse, GetTurmasResponse, NoticiaResponse, PostAlunosTurmaEspecifica, PutNoticiaResponse,UsuarioResponse } from "./InterfaceApi";
 
 const baseUrl = "http://44.223.188.239:8080";
 
@@ -63,6 +63,15 @@ export const getTurma = async (token:string | null):AxiosPromise<GetTurmasRespon
   return response
 }
 
+export const postAlunoTurma = async (token:string | null,data:PostAlunosTurmaEspecifica):AxiosPromise<PostAlunosTurmaEspecifica> => {
+  const response = await axios.post<PostAlunosTurmaEspecifica>(`${baseUrl}/alunos`,data,{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  return response
+}
+
 
 export const getCardapio = async (token: string | null): AxiosPromise<CardapioResponse> => {
   const response = await axios.get<CardapioResponse>(`${baseUrl}/cardapio`,{
@@ -73,8 +82,17 @@ export const getCardapio = async (token: string | null): AxiosPromise<CardapioRe
   return response;
 }
 
-export const postUsuario = async (token: string | null,data:PostUsuarioResponse): AxiosPromise<PostUsuarioResponse> => {
-  const response = await axios.post<PostUsuarioResponse>(`${baseUrl}/usuario`,data,{
+export const postUsuario = async (token: string | null,data:UsuarioResponse): AxiosPromise<UsuarioResponse> => {
+  const response = await axios.post<UsuarioResponse>(`${baseUrl}/usuario`,data,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+export const getUsuario = async (token: string): AxiosPromise<UsuarioResponse> => {
+  const response = await axios.get<UsuarioResponse>(`${baseUrl}/usuario`,{
     headers: {
       Authorization: `Bearer ${token}`,
     },

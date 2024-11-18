@@ -7,24 +7,24 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { usePostUsuario } from "../../hooks/Response/Usuario/PostNewUsuario";
-import { PostUsuarioResponse } from "../../api/InterfaceApi";
+import { UsuarioResponse } from "../../api/InterfaceApi";
 
 const Cadastrar = () => {
-  const [usuario, setUsuario] = useState<PostUsuarioResponse>({
+  const [usuario, setUsuario] = useState<UsuarioResponse>({
     nome: "",
     telefone: "",
     email: "",
     password: "",
     role: "",
   });
-  const {mutate,isSuccess} = usePostUsuario()
+  const { mutate, isSuccess } = usePostUsuario();
 
-  const postUsuario = (event:FormEvent) => {
-    event.preventDefault()
-    mutate(usuario)
+  const postUsuario = (event: FormEvent) => {
+    event.preventDefault();
+    mutate(usuario);
 
-    if(!isSuccess){
-      alert("Usuario criado com sucesso")
+    if (!isSuccess) {
+      alert("Usuario criado com sucesso");
     }
 
     setUsuario({
@@ -34,7 +34,7 @@ const Cadastrar = () => {
       password: "",
       role: "",
     });
-  }
+  };
 
   return (
     <>
@@ -80,10 +80,12 @@ const Cadastrar = () => {
 
           <RadioGroup
             value={usuario.role}
-            onChange={(event) => setUsuario((prevState) => ({
-              ...prevState,
-              role: event.target.value,
-            }))}
+            onChange={(event) =>
+              setUsuario((prevState) => ({
+                ...prevState,
+                role: event.target.value,
+              }))
+            }
             name="radio-buttons-group"
           >
             <FormControlLabel
