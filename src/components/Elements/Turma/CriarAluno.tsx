@@ -98,7 +98,7 @@ const CriarAluno = ({turmaId}:CriarALuno) => {
                 )}
               />
               <label className="py-1" htmlFor="responsavel">
-                Nome:
+                Nome do ALuno:
               </label>
               <TextField
                 id="nome"
@@ -144,7 +144,7 @@ const CriarAluno = ({turmaId}:CriarALuno) => {
 
               <button
                 onClick={PostCreateAluno}
-                className="col-span-2 bg-blue-300 rounded-lg py-4 font-semibold"
+                className="col-span-2 bg-blue-300 rounded-lg py-4 font-semibold mt-4"
               >
                 Criar
               </button>
