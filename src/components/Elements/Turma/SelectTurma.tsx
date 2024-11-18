@@ -6,26 +6,28 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CriarAluno from "./CriarAluno";
 import AlunoDelete from "./AlunoDelete";
 import { useState } from "react";
+import EditTurma from "./EditTurma";
 
 interface SelectTurma {
   alunosTurma?: Alunos[];
-  idTurma:string
+  idTurma: string;
 }
 
-const editAluno = () => {
-  console.log('editando aluno')
-}
-
-const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
+const SelectTurma = ({ alunosTurma, idTurma }: SelectTurma) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [abrirDelete,setAbrirDelete] = useState<boolean>(false)
-  const [idAlunoDelete,setidAlunoDelete] = useState<string>('')
+  const [abrirDelete, setAbrirDelete] = useState<boolean>(false);
+  const [idAlunoDelete, setidAlunoDelete] = useState<string>("");
+  const [idAlunoEdit, setIdAlunoEdit] = useState<string>("");
 
-  const deleteAluno = (idAluno:string) => {
-    setAbrirDelete(true)
-    setidAlunoDelete(idAluno)
-  }
+  const deleteAluno = (idAluno: string) => {
+    setAbrirDelete(true);
+    setidAlunoDelete(idAluno);
+  };
+
+  const editAluno = (idAluno: string) => {
+    setIdAlunoEdit(idAluno);
+  };
 
   return (
     <>
@@ -37,7 +39,7 @@ const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
             onClick={() => navigate("/admin/")}
           />
 
-          <CriarAluno turmaId={idTurma}/>
+          <CriarAluno turmaId={idTurma} />
         </>
       )}
 
@@ -63,16 +65,35 @@ const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
                   Data de Nascimento: {item.dataNascimento}
                 </p>
 
+                {idAlunoEdit == item.id && (
+                  <EditTurma
+                    nome={item.nome}
+                    dataNascimento={item.dataNascimento}
+                    matricula={item.matricula}
+                    idAluno={item.id}
+                  />
+                )}
+
                 <div className="absolute top-0 right-0 p-2">
-                    <EditNoteIcon className="cursor-pointer" onClick={editAluno} />
-                    <DeleteIcon className="cursor-pointer" onClick={() => deleteAluno(item.id)} />
+                  <EditNoteIcon
+                    className="cursor-pointer"
+                    onClick={() => editAluno(item.id)}
+                  />
+                  <DeleteIcon
+                    className="cursor-pointer"
+                    onClick={() => deleteAluno(item.id)}
+                  />
                 </div>
               </div>
             </>
           ))
         )}
 
-        <AlunoDelete setAbrirDelete={setAbrirDelete} abrirDelete={abrirDelete} idAlunoDelete={idAlunoDelete}/>
+        <AlunoDelete
+          setAbrirDelete={setAbrirDelete}
+          abrirDelete={abrirDelete}
+          idAlunoDelete={idAlunoDelete}
+        />
       </div>
     </>
   );

@@ -72,6 +72,16 @@ export const postAlunoTurma = async (token:string | null,data:PostAlunosTurmaEsp
   return response
 }
 
+export const putAlunoTurma = async (token:string | null,idAluno:string,data:any) => {
+  const response = await axios.put(`${baseUrl}/alunos/${idAluno}`,data,{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  return response
+}
+
+
 export const deleteAlunoTurma = async (token:string | null,idAluno:string) => {
   const response = await axios.delete(`${baseUrl}/alunos/${idAluno}`,{
     headers:{
