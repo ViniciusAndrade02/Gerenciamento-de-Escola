@@ -59,6 +59,8 @@ const NavegationAll = () => {
 
     if(urlStageTwo == route.nameNavegation[1].toLowerCase() && urlStageTwo != undefined){
       setPagination(route.namePage[1]);
+    }else if(urlStageTwo == route.nameNavegation[2].toLowerCase() && urlStageTwo != undefined){
+      setPagination(route.namePage[2]);
     }else if(urlStageOne == route.urlDefault){
       setPagination(route.namePage[0]);
     }
