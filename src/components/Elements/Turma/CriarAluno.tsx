@@ -41,11 +41,8 @@ const CriarAluno = ({turmaId}:CriarALuno) => {
 
   const PostCreateAluno = (event: FormEvent) => {
     event.preventDefault();
-    console.log(createAluno)
     mutate(createAluno)
     navigate('/admin')
-
-
   };
 
   const GetTodosPai = () => {

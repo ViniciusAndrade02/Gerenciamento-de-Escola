@@ -72,6 +72,15 @@ export const postAlunoTurma = async (token:string | null,data:PostAlunosTurmaEsp
   return response
 }
 
+export const deleteAlunoTurma = async (token:string | null,idAluno:string) => {
+  const response = await axios.delete(`${baseUrl}/alunos/${idAluno}`,{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  return response
+}
+
 
 export const getCardapio = async (token: string | null): AxiosPromise<CardapioResponse> => {
   const response = await axios.get<CardapioResponse>(`${baseUrl}/cardapio`,{

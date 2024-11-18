@@ -1,16 +1,32 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Alunos } from "../../../api/InterfaceApi";
 import { useNavigate, useParams } from "react-router-dom";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import DeleteIcon from "@mui/icons-material/Delete";
 import CriarAluno from "./CriarAluno";
+import AlunoDelete from "./AlunoDelete";
+import { useState } from "react";
 
 interface SelectTurma {
   alunosTurma?: Alunos[];
   idTurma:string
 }
 
+const editAluno = () => {
+  console.log('editando aluno')
+}
+
 const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [abrirDelete,setAbrirDelete] = useState<boolean>(false)
+  const [idAlunoDelete,setidAlunoDelete] = useState<string>('')
+
+  const deleteAluno = (idAluno:string) => {
+    setAbrirDelete(true)
+    setidAlunoDelete(idAluno)
+  }
+
   return (
     <>
       {id && (
@@ -35,7 +51,7 @@ const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
             <>
               <div
                 key={index}
-                className="mb-4 p-4 border border-gray-300 rounded-md bg-white shadow-sm"
+                className="mb-4 p-4 border border-gray-300 rounded-md bg-white shadow-sm relative"
               >
                 <h1 className="text-xl font-semibold text-gray-800">
                   {item.nome}
@@ -46,10 +62,17 @@ const SelectTurma = ({ alunosTurma,idTurma }: SelectTurma) => {
                 <p className="text-sm text-gray-600">
                   Data de Nascimento: {item.dataNascimento}
                 </p>
+
+                <div className="absolute top-0 right-0 p-2">
+                    <EditNoteIcon className="cursor-pointer" onClick={editAluno} />
+                    <DeleteIcon className="cursor-pointer" onClick={() => deleteAluno(item.id)} />
+                </div>
               </div>
             </>
           ))
         )}
+
+        <AlunoDelete setAbrirDelete={setAbrirDelete} abrirDelete={abrirDelete} idAlunoDelete={idAlunoDelete}/>
       </div>
     </>
   );
