@@ -37,6 +37,7 @@ export const postNoticia = async (token:string | null,data:any): AxiosPromise<an
 }
 
 export const putNoticia = async (idNoticia:string,token:any,data:PutNoticiaResponse):AxiosPromise<PutNoticiaResponse> => {
+  console.log(data)
     const response = await axios.put<PutNoticiaResponse>(`${baseUrl}/noticias/${idNoticia}`,data,{
       headers: {
         Authorization: `Bearer ${token}`,
