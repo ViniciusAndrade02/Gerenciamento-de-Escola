@@ -43,6 +43,8 @@ const SelectTurma = ({ alunosTurma, idTurma }: SelectTurma) => {
         </>
       )}
 
+      
+
       <div className="p-6 bg-gray-100 rounded-lg shadow-md">
         {alunosTurma?.length === 0 ? (
           <p className="text-center  ">

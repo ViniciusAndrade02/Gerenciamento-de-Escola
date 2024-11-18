@@ -3,26 +3,27 @@ import { useTurmas } from "../../hooks/Response/TurmaHook/Turmas";
 import { useState } from "react";
 import { Alunos } from "../../api/InterfaceApi";
 import SelectTurma from "../../components/Elements/Turma/SelectTurma";
-
+import CriarTurma from "../../components/Elements/Turma/CriarTurma";
 
 const Turma = () => {
   const { data, isLoading } = useTurmas();
-  const [alunosTurma, setAlunosTurma] = useState<Alunos[] | undefined>([]); 
-  const [idTurmaSelect,setIdTurmaSelect] = useState<string>('')
+  const [alunosTurma, setAlunosTurma] = useState<Alunos[] | undefined>([]);
+  const [idTurmaSelect, setIdTurmaSelect] = useState<string>("");
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const buscarTurma = (idTurma: string, alunos: Alunos[]) => {
     navigate(`/admin/${idTurma}`);
-    setIdTurmaSelect(idTurma)
-    setAlunosTurma(alunos);  
+    setIdTurmaSelect(idTurma);
+    setAlunosTurma(alunos);
   };
 
   return (
     <>
+      {!id && <CriarTurma />}
       {isLoading && <p>Carregando...</p>}
       {!isLoading && !id && data && (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           {Object.values(data)
             .filter((_, index) => index % 2 === 0)
             .map((item, index) => (
@@ -48,7 +49,7 @@ const Turma = () => {
         </div>
       )}
 
-      {id && <SelectTurma alunosTurma={alunosTurma} idTurma={idTurmaSelect}/>}
+      {id && <SelectTurma alunosTurma={alunosTurma} idTurma={idTurmaSelect} />}
     </>
   );
 };

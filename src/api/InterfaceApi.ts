@@ -42,6 +42,12 @@ export interface PostAlunosTurmaEspecifica{
   paiId:string
 }
 
+export interface PostNewTurmas{
+  nome:string,
+  descricao:string,
+  professorId:string
+}
+
 export interface UsuarioResponse {
   id?:string
   nome: string;
