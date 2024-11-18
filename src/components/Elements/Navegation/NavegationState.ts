@@ -15,6 +15,6 @@ export const Menu = {
 export const Admin = {
   urlDefault:'admin',
   urls: ["noticia", "cadastrar"],
-  namePage: ["Turmas", "Noticia", "Cadastrar"],
-  nameNavegation:['Aluno','Noticia','Cadastrar','Sair']
+  namePage: ["Turmas", "Noticia", "Usuários"],
+  nameNavegation:['Aluno','Noticia','Usuários','Sair']
 };

@@ -1,152 +1,47 @@
-import {
-  Box,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
-import { FormEvent, useState } from "react";
-import { usePostUsuario } from "../../hooks/Response/Usuario/PostNewUsuario";
-import { UsuarioResponse } from "../../api/InterfaceApi";
+import { Button, ButtonGroup } from "@mui/material";
+import CadastrarUsuarios from "../../components/Elements/Usuarios/CadastrarUsuarios";
+import ShowUsuarios from "../../components/Elements/Usuarios/ShowUsuarios";
+import { useGetUsuarios } from "../../hooks/Response/Usuario/GetUsuario";
+import { useState } from "react";
 
 const Cadastrar = () => {
-  const [usuario, setUsuario] = useState<UsuarioResponse>({
-    nome: "",
-    telefone: "",
-    email: "",
-    password: "",
-    role: "",
+  const { data, status } = useGetUsuarios();
+  const [showComponent, setShowComponent] = useState({
+    mostrarUsuarios: true,
+    cadastrar: false,
   });
-  const { mutate, isSuccess } = usePostUsuario();
 
-  const postUsuario = (event: FormEvent) => {
-    event.preventDefault();
-    mutate(usuario);
-
-    if (!isSuccess) {
-      alert("Usuario criado com sucesso");
+  const mudarComponent = (mudar: string) => {
+    if (mudar === "usuario") {
+      setShowComponent((prevState) => ({
+        ...prevState,
+        mostrarUsuarios: true,
+        cadastrar: false,
+      }));
     }
-
-    setUsuario({
-      nome: "",
-      telefone: "",
-      email: "",
-      password: "",
-      role: "",
-    });
+    if (mudar === "cadastrar") {
+      setShowComponent((prevState) => ({
+        ...prevState,
+        mostrarUsuarios: false,
+        cadastrar: true,
+      }));
+    }
   };
 
   return (
     <>
-      <Box
-        component="form"
-        sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
+      <ButtonGroup
+        className="mb-4"
+        variant="contained"
+        aria-label="Basic button group"
       >
-        <div className="flex flex-col">
-          <label className="py-1" htmlFor="responsavel">
-            Nome
-          </label>
-          <TextField
-            id="nome"
-            variant="outlined"
-            value={usuario.nome}
-            onChange={(event) =>
-              setUsuario((prevState: any) => ({
-                ...prevState,
-                nome: event.target.value,
-              }))
-            }
-          />
-
-          <label className="py-1" htmlFor="responsavel">
-            Email
-          </label>
-          <TextField
-            id="nome"
-            variant="outlined"
-            value={usuario.email}
-            type="email"
-            onChange={(event) =>
-              setUsuario((prevState: any) => ({
-                ...prevState,
-                email: event.target.value,
-              }))
-            }
-          />
-
-          <label className="py-1" htmlFor="responsavel">
-            Selecione a permissão:
-          </label>
-
-          <RadioGroup
-            value={usuario.role}
-            onChange={(event) =>
-              setUsuario((prevState) => ({
-                ...prevState,
-                role: event.target.value,
-              }))
-            }
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              value="ADMIN"
-              control={<Radio />}
-              label="Administrador"
-            />
-            <FormControlLabel
-              value="PROFESSOR"
-              control={<Radio />}
-              label="Professor"
-            />
-            <FormControlLabel
-              value="PAI"
-              control={<Radio />}
-              label="Responsável"
-            />
-          </RadioGroup>
-        </div>
-
-        <div className="flex flex-col">
-          <label className="py-1" htmlFor="responsavel">
-            Telefone
-          </label>
-          <TextField
-            id="nome"
-            variant="outlined"
-            type="number"
-            value={usuario.telefone}
-            onChange={(event) =>
-              setUsuario((prevState: any) => ({
-                ...prevState,
-                telefone: event.target.value,
-              }))
-            }
-          />
-
-          <label className="py-1" htmlFor="responsavel">
-            Senha:
-          </label>
-
-          <TextField
-            id="nome"
-            variant="outlined"
-            value={usuario.password}
-            onChange={(event) =>
-              setUsuario((prevState: any) => ({
-                ...prevState,
-                password: event.target.value,
-              }))
-            }
-          />
-        </div>
-
-        <button
-          onClick={postUsuario}
-          className="col-span-2 bg-blue-300 rounded-lg py-4 font-semibold"
-        >
-          Criar
-        </button>
-      </Box>
+        <Button onClick={() => mudarComponent("usuario")}>Usuarios</Button>
+        <Button onClick={() => mudarComponent("cadastrar")}>Cadastrar</Button>
+      </ButtonGroup>
+      {showComponent.cadastrar && <CadastrarUsuarios />}
+      {status == "success" && showComponent.mostrarUsuarios && (
+        <ShowUsuarios data={Array.isArray(data) ? [...data] : []} />
+      )}
     </>
   );
 };
