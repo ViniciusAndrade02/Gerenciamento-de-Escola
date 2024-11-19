@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "@mui/material";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeletarUsuario from "./DeletarUsuario";
+import EditUsuario from "./EditUsuario";
 
 interface ShowUsuarios {
   data?: UsuarioResponse[];
@@ -12,11 +13,12 @@ interface ShowUsuarios {
 const ShowUsuarios = ({ data }: ShowUsuarios) => {
   const [usuarios, setUsuarios] = useState<UsuarioResponse[] | undefined>(data);
   const [abrirDelete, setAbrirDelete] = useState<boolean>(false);
-  const [idUsuario,setIdUsuario] = useState<string>()
+  const [abrirEdit,setAbrirEdit] = useState<boolean>(false)
+  const [idUsuario, setIdUsuario] = useState<string>();
 
   useEffect(() => {
-    setUsuarios(data)
-  },[data])
+    setUsuarios(data);
+  }, [data]);
 
   const buscarRole = (role: string) => {
     switch (role) {
@@ -36,12 +38,14 @@ const ShowUsuarios = ({ data }: ShowUsuarios) => {
   };
 
   const editUsuario = (idUsuario?: string) => {
-    console.log(idUsuario);
+    setIdUsuario(idUsuario);
+    setAbrirEdit(!abrirEdit)
   };
 
-  const deleteUsuario = (idUsuario?:string) => {
-    setIdUsuario(idUsuario)
+  const deleteUsuario = (idUsuario?: string) => {
+    setIdUsuario(idUsuario);
     setAbrirDelete(true);
+    setIdUsuario("");
   };
 
   return (
@@ -67,6 +71,9 @@ const ShowUsuarios = ({ data }: ShowUsuarios) => {
                   {item.nome}
                 </h1>
                 <p className="text-sm text-gray-600">Email: {item.email}</p>
+                <p className="text-sm text-gray-600">
+                  Telefone: {item.telefone}
+                </p>
                 <p className="text-sm text-gray-600">Prioridade: {item.role}</p>
 
                 <div className="absolute top-0 right-0 p-2">
@@ -79,6 +86,16 @@ const ShowUsuarios = ({ data }: ShowUsuarios) => {
                     onClick={() => deleteUsuario(item.id)}
                   />
                 </div>
+
+                {idUsuario == item.id && abrirEdit &&(
+                  <EditUsuario
+                    email={item.email}
+                    idUsuario={item.id}
+                    nome={item.nome}
+                    telefone={item.telefone}
+                    setAbrirEdit={setAbrirEdit}
+                  />
+                )}
               </div>
             </>
           ))

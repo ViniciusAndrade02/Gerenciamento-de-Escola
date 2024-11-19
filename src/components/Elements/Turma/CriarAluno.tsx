@@ -9,7 +9,7 @@ import { Autocomplete, Box, TextField } from "@mui/material";
 import { useGetUsuarios } from "../../../hooks/Response/Usuario/GetUsuario";
 import { UsuarioResponse } from "../../../api/InterfaceApi";
 import { usePostAlunoTurma } from "../../../hooks/Response/TurmaHook/PostAlunoTurma";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { UsuarioResponse } from "../../../api/InterfaceApi";
 
 interface CriarALuno{
@@ -18,7 +18,6 @@ interface CriarALuno{
 
 const CriarAluno = ({turmaId}:CriarALuno) => {
   const [open, setOpen] = useState(false);
-  const { id } = useParams()
   const navigate = useNavigate()
   const { data } = useGetUsuarios();
   const {mutate}= usePostAlunoTurma()

@@ -129,6 +129,16 @@ export const getUsuario = async (token: string): AxiosPromise<UsuarioResponse> =
   return response;
 }
 
+export const putUsuario = async (token: string,idUsuario:string,data:any) => {
+  const response = await axios.put(`${baseUrl}/usuario/${idUsuario}`,data,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+
 export const deleteUsuario = async (token: string,idUsuario:string) => {
   const response = await axios.delete(`${baseUrl}/usuario/${idUsuario}`,{
     headers: {
