@@ -73,6 +73,15 @@ export const postTurma = async (token:string | null,data:PostNewTurmas):AxiosPro
   return response
 }
 
+export const deleteTurma = async (token:string | null,idTurma:string) => {
+  const response = await axios.delete(`${baseUrl}/turmas/${idTurma}`,{
+    headers:{
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  return response
+}
+
 export const postAlunoTurma = async (token:string | null,data:PostAlunosTurmaEspecifica):AxiosPromise<PostAlunosTurmaEspecifica> => {
   const response = await axios.post<PostAlunosTurmaEspecifica>(`${baseUrl}/alunos`,data,{
     headers:{

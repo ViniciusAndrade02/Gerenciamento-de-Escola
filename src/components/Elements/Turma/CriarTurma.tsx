@@ -28,6 +28,12 @@ const CriarTurma = () => {
   };
 
   const handleClose = () => {
+
+    setCriarTurma({
+      nome:'',
+      descricao:'',
+      professorId:''
+    })
     setOpen(false);
   };
 
