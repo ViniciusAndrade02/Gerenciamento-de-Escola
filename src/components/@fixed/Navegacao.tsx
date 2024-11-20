@@ -1,17 +1,36 @@
-import { Outlet } from "react-router-dom";
-import NavegationAll from "../Elements/Navegation/NavegationAll";
+import React from "react";
+import { Link } from "react-router-dom";
+import FeedIcon from "@mui/icons-material/Feed";
+import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ChatIcon from "@mui/icons-material/Chat";
 
 const Navegacao = () => {
   return (
-    <>
-      <div className="flex flex-col mx-10 mt-3 mb-4">
-        <NavegationAll />
-
-        <div className="">
-          <Outlet />
-        </div>
-      </div>
-    </>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/menu">
+            <FeedIcon /> Notícias
+          </Link>
+        </li>
+        <li>
+          <Link to="/menu/cardapio">
+            <RestaurantMenuIcon /> Cardápio
+          </Link>
+        </li>
+        <li>
+          <Link to="/menu/perfil">
+            <AccountCircleIcon /> Perfil
+          </Link>
+        </li>
+        <li>
+          <Link to="/menu/chat">
+            <ChatIcon /> Bate-Papo
+          </Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
