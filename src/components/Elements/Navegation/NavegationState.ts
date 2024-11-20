@@ -7,7 +7,7 @@ export interface Route {
 
 export const Menu = {
   urlDefault:'menu',
-  urls: ["cardapio", "perfil"],
+  urls: ["cardapio", "perfil","Chat"],
   namePage: ["Noticias do Dia", "Cardápio da Semana", "Perfil"],
   nameNavegation:['Menu','Cardápio','Perfil',"Chat",'Sair']
 };
