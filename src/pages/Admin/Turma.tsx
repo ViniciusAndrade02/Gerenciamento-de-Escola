@@ -7,12 +7,15 @@ import { Alunos } from "../../api/InterfaceApi";
 import SelectTurma from "../../components/Elements/Turma/SelectTurma";
 import CriarTurma from "../../components/Elements/Turma/CriarTurma";
 import DeleteTurma from "../../components/Elements/Turma/DeleteTurma";
+import UpdateTurma from "../../components/Elements/Turma/UpdateTurma";
 
 const Turma = () => {
   const { data, isLoading } = useTurmas();
   const [alunosTurma, setAlunosTurma] = useState<Alunos[] | undefined>([]);
+  const [itemTurma, setItemTurma] = useState<any>();
   const [idTurmaSelect, setIdTurmaSelect] = useState<string>("");
   const [abrirDeleteTurma, setAbrirDeleteTurma] = useState<boolean>(false);
+  const [abrirUpdateTurma, setAbrirUpdateTurma] = useState<boolean>(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,11 +28,11 @@ const Turma = () => {
   const deleteTurma = (idTurma: string) => {
     setAbrirDeleteTurma(true);
     setIdTurmaSelect(idTurma);
-
   };
 
-  const updateTurma = (idTurma: string) => {
-    console.log(idTurma);
+  const updateTurma = (turma: any) => {
+    setItemTurma(turma);
+    setAbrirUpdateTurma(true);
   };
 
   return (
@@ -43,16 +46,16 @@ const Turma = () => {
             .map((item, index) => (
               <div
                 key={index}
-                className="flex w-auto h-20 bg-slate-300 rounded-lg items-center justify-center duration-300 hover:bg-slate-200 cursor-pointer relative "
+                className="flex w-auto h-20 bg-slate-300 rounded-lg items-center justify-center duration-300 hover:bg-slate-200 cursor-pointer relative group "
                 onClick={() => buscarTurma(item.id, item.alunos)}
               >
                 <p>{item.nome}</p>
-                <div className="absolute top-0 right-0 p-2 ">
+                <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 duration-300">
                   <EditNoteIcon
                     className="cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-                      updateTurma(item.id);
+                      updateTurma(item);
                     }}
                   />
                   <DeleteIcon
@@ -70,17 +73,17 @@ const Turma = () => {
             .map((item, index) => (
               <div
                 key={index}
-                className="flex w-auto h-20 bg-slate-300 rounded-lg items-center justify-center duration-300 hover:bg-slate-200 cursor-pointer relative"
+                className="flex w-auto h-20 bg-slate-300 rounded-lg items-center justify-center duration-300 hover:bg-slate-200 cursor-pointer relative group"
                 onClick={() => buscarTurma(item.id, item.alunos)}
               >
                 <p>{item.nome}</p>
 
-                <div className="absolute top-0 right-0 p-2">
+                <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 duration-300">
                   <EditNoteIcon
                     className="cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
-                      updateTurma(item.id);
+                      updateTurma(item);
                     }}
                   />
                   <DeleteIcon
@@ -101,6 +104,12 @@ const Turma = () => {
         setAbrirDeleteTurma={setAbrirDeleteTurma}
         idTurmaSelect={idTurmaSelect}
         setIdTurmaSelect={setAbrirDeleteTurma}
+      />
+
+      <UpdateTurma
+        itensTurma={itemTurma}
+        abrirUpdate={abrirUpdateTurma}
+        setAbrirUpdate={setAbrirUpdateTurma}
       />
 
       {id && <SelectTurma alunosTurma={alunosTurma} idTurma={idTurmaSelect} />}
