@@ -9,12 +9,12 @@ export const Menu = {
   urlDefault:'menu',
   urls: ["cardapio", "perfil"],
   namePage: ["Noticias do Dia", "Cardápio da Semana", "Perfil"],
-  nameNavegation:['Menu','Cardápio','Perfil','Sair']
+  nameNavegation:['Menu','Cardápio','Perfil',"Chat",'Sair']
 };
 
 export const Admin = {
   urlDefault:'admin',
-  urls: ["noticia", "cadastrar"],
+  urls: ["noticia", "cadastrar","cardapio","chat"],
   namePage: ["Turmas", "Noticia", "Usuários"],
-  nameNavegation:['Aluno','Noticia','Usuários','Sair']
+  nameNavegation:['Aluno','Noticia','Usuários','Cardapio','Chat','Sair']
 };
