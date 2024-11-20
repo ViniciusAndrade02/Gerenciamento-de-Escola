@@ -17,6 +17,8 @@ import { useContext } from "react";
 import { AuthContext } from "./context/Auth";
 import NoticiaAdmin from "./pages/Admin/NoticiaAdmin";
 import Cadastrar from "./pages/Admin/Cadastrar";
+import CardapioAdmin from "./pages/Admin/CardapioAdmin";
+import Chat from "./pages/Chat/Chat";
 
 const ProtectedRoute = ({ role }: any) => {
   const { user } = useContext(AuthContext);
@@ -70,6 +72,7 @@ const IndexRouter = createBrowserRouter(
           <Route index element={<Noticia />} />
           <Route path="cardapio" element={<Cardápio />} />
           <Route path="perfil" element={<Perfil />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Route>
 
@@ -79,6 +82,8 @@ const IndexRouter = createBrowserRouter(
           <Route path="noticia/:id?" element={<NoticiaAdmin />} />
           <Route path="cadastrar" element={<Cadastrar />} />
           <Route path="Chat" element={<Chat />} />
+          <Route path="cardapio" element={<CardapioAdmin />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Route>
     </Route>
