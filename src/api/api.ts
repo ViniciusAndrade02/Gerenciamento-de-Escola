@@ -156,6 +156,15 @@ export const getUsuario = async (token: string): AxiosPromise<UsuarioResponse> =
   return response;
 }
 
+export const getUsuarioEspecifico = async (token: string,idUsuario?:string | null): AxiosPromise<UsuarioResponse> => {
+  const response = await axios.get<UsuarioResponse>(`${baseUrl}/usuario/${idUsuario}`,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
 export const putUsuario = async (token: string,idUsuario:string,data:any) => {
   const response = await axios.put(`${baseUrl}/usuario/${idUsuario}`,data,{
     headers: {
