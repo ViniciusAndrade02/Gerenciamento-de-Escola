@@ -6,16 +6,29 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Autocomplete, Box, TextField } from "@mui/material";
+import { useGetUsuarios } from "../../../hooks/Response/Usuario/GetUsuario";
+import { UsuarioResponse } from "../../../api/InterfaceApi";
+import { usePostAlunoTurma } from "../../../hooks/Response/TurmaHook/PostAlunoTurma";
+import { useNavigate } from "react-router-dom";
+// import { UsuarioResponse } from "../../../api/InterfaceApi";
 
-const CriarAluno = () => {
+interface CriarALuno{
+  turmaId:string
+}
+
+const CriarAluno = ({turmaId}:CriarALuno) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
+  const { data } = useGetUsuarios();
+  const {mutate}= usePostAlunoTurma()
   const [createAluno, setCreateAluno] = useState({
     nome: "",
     dataNascimento: "",
     matricula: "",
-    turmaId: "",
+    turmaId: turmaId,
     paiId: "",
   });
+  const [todosPais, setTodosPais] = useState<{ label: string,id?:string }[]>([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,24 +38,22 @@ const CriarAluno = () => {
     setOpen(false);
   };
 
-  const PostCreateAluno = (event:FormEvent) => {
-    event.preventDefault()
-    console.log(createAluno)
-  }
+  const PostCreateAluno = (event: FormEvent) => {
+    event.preventDefault();
+    mutate(createAluno)
+    navigate('/admin')
+  };
 
-  const GetTodosPai =  () => {
-    console.log('Oie')
-  }
+  const GetTodosPai = () => {
+    if (data) {
+      const TodosOsPais = Object.values(data)
+        .filter((item: UsuarioResponse) => item.role === "PAI")
+        .map((item: UsuarioResponse) => ({ label: item.nome,id:item.id }));
 
-  const top100Films = [
-    { paiId: "The Shawshank Redemption" },
-    { paiId: "The Godfather" },
-    { paiId: "The Godfather: Part II" },
-    { paiId: "The Dark Knight" },
-    { paiId: "12 Angry Men" },
-    { paiId: "Schindler's List" },
-    { paiId: "Pulp Fiction" },
-  ];
+      setTodosPais(TodosOsPais);
+    }
+  };
+
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -61,22 +72,32 @@ const CriarAluno = () => {
               component="form"
               sx={{ display: "flex", flexDirection: "column", width: "90%" }}
             >
+              <label className="py-1" htmlFor="responsavel">
+                Selecione um Pai:
+              </label>
               <Autocomplete
                 disablePortal
                 sx={{ width: "100%" }}
-                options={top100Films.map((film) => film.paiId)}
-                onChange={(_, newValue) =>
-                  setCreateAluno((prevState) => ({
-                    ...prevState,
-                    paiId: newValue || "", // Atualiza o paiId com o valor selecionado
-                  }))
-                }
+                options={todosPais}
+                getOptionLabel={(option) => option.label || ""} 
+                isOptionEqualToValue={(option, value) => option.label === value.label}
+                onChange={(_, value) => {
+                  if (value) {
+                    setCreateAluno((prev) => ({
+                      ...prev,
+                      paiId: value.id || ""
+                    }));
+                  }
+                }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Movie" onFocus={GetTodosPai} />
+                  <TextField
+                    {...params}
+                    onFocus={GetTodosPai}
+                  />
                 )}
               />
               <label className="py-1" htmlFor="responsavel">
-                Nome:
+                Nome do ALuno:
               </label>
               <TextField
                 id="nome"
@@ -122,7 +143,7 @@ const CriarAluno = () => {
 
               <button
                 onClick={PostCreateAluno}
-                className="col-span-2 bg-blue-300 rounded-lg py-4 font-semibold"
+                className="col-span-2 bg-blue-300 rounded-lg py-4 font-semibold mt-4"
               >
                 Criar
               </button>

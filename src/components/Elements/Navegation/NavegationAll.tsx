@@ -60,8 +60,18 @@ const NavegationAll = () => {
     const pathArray = location.pathname.split("/");
     const currentPage = pathArray[pathArray.length - 1];
 
+<<<<<<< HEAD
     const pageIndex = route.urls.indexOf(currentPage);
     setPagination(route.namePage[pageIndex] || route.namePage[0]);
+=======
+    if(urlStageTwo == route.nameNavegation[1].toLowerCase() && urlStageTwo != undefined){
+      setPagination(route.namePage[1]);
+    }else if(urlStageTwo == route.nameNavegation[2].toLowerCase() && urlStageTwo != undefined){
+      setPagination(route.namePage[2]);
+    }else if(urlStageOne == route.urlDefault){
+      setPagination(route.namePage[0]);
+    }
+>>>>>>> recovery-chat
   }, [location.pathname]);
 
   const DrawerList = (

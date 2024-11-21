@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate, useParams } from "react-router-dom";
 import NoticiaEdit from "./NoticiaEdit";
+import { format } from 'date-fns';
 import NoticiaDelete from "./NoticiaDelete";
 
 interface NoticiaCard {

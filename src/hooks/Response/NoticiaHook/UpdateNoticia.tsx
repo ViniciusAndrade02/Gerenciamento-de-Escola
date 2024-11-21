@@ -1,20 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/Auth";
-import { NoticiaResponse } from "../../../api/InterfaceApi";
 import { putNoticia } from "../../../api/api";
 
-interface useUpdateNoticia {
-  idNoticia: string;
-  data: any;
-}
-
-export function useUpdateNoticia({ idNoticia, data }: useUpdateNoticia) {
+export function useUpdateNoticia() {
   const queryClient = useQueryClient();
   const { token } = useContext(AuthContext);
 
-  const mutation = useMutation<NoticiaResponse>({
-    mutationFn: () => {
+  const mutation = useMutation({
+    mutationFn: ({idNoticia,data} : {idNoticia:string,data:any}) => {
       if (!token) {
         throw new Error("TOKEN NÃO ENCONTRADO");
       }
