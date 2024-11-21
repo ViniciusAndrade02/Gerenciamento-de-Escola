@@ -11,7 +11,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import FeedIcon from "@mui/icons-material/Feed";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/Auth";
 import { Admin, Menu, Route } from "./NavegationState";
@@ -58,21 +57,43 @@ const NavegationAll = () => {
   };
 
   useEffect(() => {
-    const urlStageOne = location.pathname.split("/")[1];
     const urlStageTwo = location.pathname.split("/")[2];
 
-    if (
-      urlStageTwo == route.nameNavegation[1].toLowerCase() &&
-      urlStageTwo != undefined
-    ) {
-      setPagination(route.namePage[1]);
-    } else if (
-      urlStageTwo == route.nameNavegation[2].toLowerCase() &&
-      urlStageTwo != undefined
-    ) {
-      setPagination(route.namePage[2]);
-    } else if (urlStageOne == route.urlDefault) {
-      setPagination(route.namePage[0]);
+    if (user.role == "ADMIN") {
+      switch (urlStageTwo) {
+        case "noticia":
+          setPagination(Admin.namePage[1]);
+          break;
+        case "cadastrar":
+          setPagination(Admin.namePage[2]);
+          break;
+        case "cardapio":
+          setPagination(Admin.namePage[3]);
+          break;
+        case "chat":
+          setPagination(Admin.namePage[4]);
+          break;
+        case undefined:
+          setPagination(Admin.namePage[0]);
+          break;
+      }
+    }
+
+    if ((user.role == "PAI" || user.role == "PROFESSOR")) {
+      switch (urlStageTwo) {
+        case "cardapio":
+          setPagination(Menu.namePage[1]);
+          break;
+        case "perfil":
+          setPagination(Menu.namePage[2]);
+          break;
+        case "Chat":
+          setPagination(Menu.namePage[3]);
+          break;
+        case undefined:
+          setPagination(Menu.namePage[0]);
+          break;
+      }
     }
   }, [location.pathname]);
 
@@ -101,21 +122,21 @@ const NavegationAll = () => {
                 </ListItemIcon>
               )}
 
-              {(user.role == "PAI" || user.role == "PROFESSOR")&& (
-                  <ListItemIcon>
-                    {index === 0 ? (
-                      <FeedIcon />
-                    ) : index === 1 ? (
-                      <RestaurantMenuIcon />
-                    ) : index === 2 ? (
-                      <PersonIcon />
-                    ) : index === 3 ? (
-                      <ChatIcon />
-                    ) : (
-                      <LogoutIcon />
-                    )}
-                  </ListItemIcon>
-                )}
+              {(user.role == "PAI" || user.role == "PROFESSOR") && (
+                <ListItemIcon>
+                  {index === 0 ? (
+                    <FeedIcon />
+                  ) : index === 1 ? (
+                    <RestaurantMenuIcon />
+                  ) : index === 2 ? (
+                    <PersonIcon />
+                  ) : index === 3 ? (
+                    <ChatIcon />
+                  ) : (
+                    <LogoutIcon />
+                  )}
+                </ListItemIcon>
+              )}
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
