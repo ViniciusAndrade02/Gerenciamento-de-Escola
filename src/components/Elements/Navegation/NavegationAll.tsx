@@ -15,6 +15,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/Auth";
 import { Admin, Menu, Route } from "./NavegationState";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import PersonIcon from "@mui/icons-material/Person";
+import ChatIcon from "@mui/icons-material/Chat";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const NavegationAll = () => {
   const { user, logout } = useContext(AuthContext);
@@ -57,11 +61,17 @@ const NavegationAll = () => {
     const urlStageOne = location.pathname.split("/")[1];
     const urlStageTwo = location.pathname.split("/")[2];
 
-    if(urlStageTwo == route.nameNavegation[1].toLowerCase() && urlStageTwo != undefined){
+    if (
+      urlStageTwo == route.nameNavegation[1].toLowerCase() &&
+      urlStageTwo != undefined
+    ) {
       setPagination(route.namePage[1]);
-    }else if(urlStageTwo == route.nameNavegation[2].toLowerCase() && urlStageTwo != undefined){
+    } else if (
+      urlStageTwo == route.nameNavegation[2].toLowerCase() &&
+      urlStageTwo != undefined
+    ) {
       setPagination(route.namePage[2]);
-    }else if(urlStageOne == route.urlDefault){
+    } else if (urlStageOne == route.urlDefault) {
       setPagination(route.namePage[0]);
     }
   }, [location.pathname]);
@@ -73,15 +83,39 @@ const NavegationAll = () => {
         {route.nameNavegation.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => Page(index)}>
-              <ListItemIcon>
-                {index === 0 ? (
-                  <FeedIcon />
-                ) : index === 1 ? (
-                  <RestaurantMenuIcon />
-                ) : (
-                  <AccountCircleIcon />
+              {user.role == "ADMIN" && (
+                <ListItemIcon>
+                  {index === 0 ? (
+                    <AssignmentIndIcon />
+                  ) : index === 1 ? (
+                    <FeedIcon />
+                  ) : index === 2 ? (
+                    <PersonIcon />
+                  ) : index === 3 ? (
+                    <RestaurantMenuIcon />
+                  ) : index === 4 ? (
+                    <ChatIcon />
+                  ) : (
+                    <LogoutIcon />
+                  )}
+                </ListItemIcon>
+              )}
+
+              {(user.role == "PAI" || user.role == "PROFESSOR")&& (
+                  <ListItemIcon>
+                    {index === 0 ? (
+                      <FeedIcon />
+                    ) : index === 1 ? (
+                      <RestaurantMenuIcon />
+                    ) : index === 2 ? (
+                      <PersonIcon />
+                    ) : index === 3 ? (
+                      <ChatIcon />
+                    ) : (
+                      <LogoutIcon />
+                    )}
+                  </ListItemIcon>
                 )}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
