@@ -129,6 +129,15 @@ export const getCardapio = async (token: string | null): AxiosPromise<CardapioRe
   return response;
 }
 
+export const putCardapio = async (token: string | null,semana:string,data:string) => {
+  const response = await axios.put(`${baseUrl}/cardapio/${semana}`,data,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
 export const postUsuario = async (token: string | null,data:UsuarioResponse): AxiosPromise<UsuarioResponse> => {
   const response = await axios.post<UsuarioResponse>(`${baseUrl}/usuario`,data,{
     headers: {
@@ -140,6 +149,15 @@ export const postUsuario = async (token: string | null,data:UsuarioResponse): Ax
 
 export const getUsuario = async (token: string): AxiosPromise<UsuarioResponse> => {
   const response = await axios.get<UsuarioResponse>(`${baseUrl}/usuario`,{
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
+export const getUsuarioEspecifico = async (token: string,idUsuario?:string | null): AxiosPromise<UsuarioResponse> => {
+  const response = await axios.get<UsuarioResponse>(`${baseUrl}/usuario/${idUsuario}`,{
     headers: {
       Authorization: `Bearer ${token}`,
     },

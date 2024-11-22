@@ -24,8 +24,8 @@ const DeletarUsuario = ({
   };
 
   const deletarAluno = () => {
+    console.log(idUsuarioDelete)
     mutate(idUsuarioDelete);
-    alert("Deletado com sucesso");
     handleClose();
   };
 

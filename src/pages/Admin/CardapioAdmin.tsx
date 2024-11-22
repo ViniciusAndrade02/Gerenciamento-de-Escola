@@ -1,10 +1,9 @@
-import { useCardapio } from "../../hooks/Response/Cardapio";
+import { useCardapio } from "../../hooks/Response/Cardapio/Cardapio";
 import CardapioCard from "../../components/Elements/CardapioCard";
 
 const CardapioAdmin = () => {
-
   const { data, isLoading } = useCardapio();
-  console.log(data)
+  console.log(data);
   return (
     <>
       <>

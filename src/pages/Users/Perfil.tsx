@@ -1,14 +1,16 @@
 import { TextField } from "@mui/material";
+import { useContext } from "react";
+import { AuthContext } from "../../context/Auth";
+import { useGetUsuariosEspecifico } from "../../hooks/Response/Usuario/GetUsuarioEspecifico";
+
 
 const Perfil = () => {
-  const Users = {
-    Responsavel: "Diego",
-    Email: "Diego@gmail.com",
-    Nascimento: "24/10/20",
-    Telefone: "88888",
-    NomeDoAluno: "Felipe",
-    Matricula: "78215",
-  };
+
+  const {user} = useContext(AuthContext)
+  const {data} = useGetUsuariosEspecifico(user.id)
+  console.log(data)
+  console.log(user.id)
+
 
   return (
     <>
@@ -18,8 +20,8 @@ const Perfil = () => {
           <label htmlFor="responsavel">Responsável</label>
           <TextField
             id="responsavel"
+            value={data?.nome}
             variant="outlined"
-            value={Users.Responsavel}
             disabled
           />
 
@@ -27,25 +29,25 @@ const Perfil = () => {
           <TextField
             id="email"
             variant="outlined"
-            value={Users.Email}
+            value={data?.email}
             disabled
           />
 
-          <label htmlFor="nascimento">Nascimento</label>
+          <label htmlFor="nascimento">Telefone</label>
           <TextField
             id="nascimento"
             variant="outlined"
-            value={Users.Nascimento}
+            value={data?.telefone}
             disabled
           />
         </div>
 
         <div className="flex flex-col space-y-2">
-          <label htmlFor="telefone">Telefone</label>
+          <label htmlFor="telefone">Autoridade</label>
           <TextField
             id="telefone"
             variant="outlined"
-            value={Users.Telefone}
+            value={data?.role}
             disabled
           />
 
@@ -53,7 +55,7 @@ const Perfil = () => {
           <TextField
             id="nome-do-aluno"
             variant="outlined"
-            value={Users.NomeDoAluno}
+
             disabled
           />
 
@@ -61,7 +63,6 @@ const Perfil = () => {
           <TextField
             id="matricula"
             variant="outlined"
-            value={Users.Matricula}
             disabled
           />
         </div>

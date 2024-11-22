@@ -13,7 +13,7 @@ interface ShowUsuarios {
 const ShowUsuarios = ({ data }: ShowUsuarios) => {
   const [usuarios, setUsuarios] = useState<UsuarioResponse[] | undefined>(data);
   const [abrirDelete, setAbrirDelete] = useState<boolean>(false);
-  const [abrirEdit,setAbrirEdit] = useState<boolean>(false)
+  const [abrirEdit, setAbrirEdit] = useState<boolean>(false);
   const [idUsuario, setIdUsuario] = useState<string>();
 
   useEffect(() => {
@@ -39,13 +39,12 @@ const ShowUsuarios = ({ data }: ShowUsuarios) => {
 
   const editUsuario = (idUsuario?: string) => {
     setIdUsuario(idUsuario);
-    setAbrirEdit(!abrirEdit)
+    setAbrirEdit(!abrirEdit);
   };
 
   const deleteUsuario = (idUsuario?: string) => {
     setIdUsuario(idUsuario);
     setAbrirDelete(true);
-    setIdUsuario("");
   };
 
   return (
@@ -87,7 +86,7 @@ const ShowUsuarios = ({ data }: ShowUsuarios) => {
                   />
                 </div>
 
-                {idUsuario == item.id && abrirEdit &&(
+                {idUsuario == item.id && abrirEdit && (
                   <EditUsuario
                     email={item.email}
                     idUsuario={item.id}
