@@ -54,7 +54,7 @@ const PublicRoute = ({ children }: any) => {
   return children;
 };
 
-// Definindo o roteamento
+
 const IndexRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
