@@ -70,10 +70,10 @@ const CriarAluno = ({turmaId}:CriarALuno) => {
           <DialogContentText id="alert-dialog-description">
             <Box
               component="form"
-              sx={{ display: "flex", flexDirection: "column", width: "90%" }}
+              sx={{ display: "flex", flexDirection: "column", width: "100%" }}
             >
               <label className="py-1" htmlFor="responsavel">
-                Selecione um Pai:
+                Selecione um Responsável:
               </label>
               <Autocomplete
                 disablePortal

@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect, useState } from "react";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useUpdateTurma } from "../../../hooks/Response/TurmaHook/UploadTurma";
 
 interface Turma {
@@ -70,6 +70,8 @@ const UpdateTurma = ({
         <DialogTitle id="alert-dialog-title">Editar Turma</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
+            <Box sx={{display:'flex',flexDirection:'column',gap:'4px'}}>
+
             <label className="py-1" htmlFor="responsavel">
               Nome:
             </label>
@@ -99,6 +101,7 @@ const UpdateTurma = ({
                 }))
               }
             />
+            </Box>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
