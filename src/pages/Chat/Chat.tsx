@@ -39,7 +39,7 @@ const ChatRoom = () => {
       await addDoc(messageRef, {
         text: formValue,
         uid: user?.id || "desconhecido", // Identificador do usuário
-        name: user?.sub || user?.email || "Anônimo", // Nome ou e-mail do usuário
+        name: user?.sub || "Anônimo", // Nome ou e-mail do usuário
         createdAt: serverTimestamp(),
       });
       setFormValue(""); // Limpar o campo de entrada

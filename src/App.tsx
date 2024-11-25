@@ -18,7 +18,6 @@ import { AuthContext } from "./context/Auth";
 import NoticiaAdmin from "./pages/Admin/NoticiaAdmin";
 import Cadastrar from "./pages/Admin/Cadastrar";
 import CardapioAdmin from "./pages/Admin/CardapioAdmin";
-import Chat from "./pages/Chat/Chat";
 import ChatRoom from "./pages/Chat/Chat";
 
 const ProtectedRoute = ({ role }: any) => {
