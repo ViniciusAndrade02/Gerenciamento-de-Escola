@@ -5,7 +5,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { UsuarioResponse } from "../../../api/InterfaceApi";
 import { usePostUsuario } from "../../../hooks/Response/Usuario/PostNewUsuario";
 

@@ -1,5 +1,4 @@
 import { FormEvent, useContext, useState } from "react";
-import axios from "axios";
 import { AuthContext } from "../../../context/Auth";
 import { Box, Button, Divider, TextField } from "@mui/material";
 import { useUpdateNoticia } from "../../../hooks/Response/NoticiaHook/UpdateNoticia";
