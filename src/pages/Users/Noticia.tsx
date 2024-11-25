@@ -14,13 +14,13 @@ const Noticia = () => {
       Object.values(data)
         .map((item) => ({
           ...item,
-          dataPublicacao: new Date(item.dataPublicacao), // Data para ordenação
+          dataPublicacao: new Date(item.dataPublicacao),
           dataOrdenada: format(
             new Date(item.dataPublicacao),
             "dd/MM/yyyy HH:mm:ss"
           ),
         }))
-        .sort((a, b) => b.dataPublicacao - a.dataPublicacao) // Ordena pela data
+        .sort((a, b) => b.dataPublicacao - a.dataPublicacao) 
     );
   }, [data]);
 

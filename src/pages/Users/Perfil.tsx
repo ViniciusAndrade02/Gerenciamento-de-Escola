@@ -3,14 +3,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/Auth";
 import { useGetUsuariosEspecifico } from "../../hooks/Response/Usuario/GetUsuarioEspecifico";
 
-
 const Perfil = () => {
-
-  const {user} = useContext(AuthContext)
-  const {data} = useGetUsuariosEspecifico(user.id)
-  console.log(data)
-  console.log(user.id)
-
+  const { user } = useContext(AuthContext);
+  const { data } = useGetUsuariosEspecifico(user.id);
+  console.log(data);
+  console.log(user.id);
 
   return (
     <>
@@ -32,14 +29,6 @@ const Perfil = () => {
             value={data?.email}
             disabled
           />
-
-          <label htmlFor="nascimento">Telefone</label>
-          <TextField
-            id="nascimento"
-            variant="outlined"
-            value={data?.telefone}
-            disabled
-          />
         </div>
 
         <div className="flex flex-col space-y-2">
@@ -51,18 +40,11 @@ const Perfil = () => {
             disabled
           />
 
-          <label htmlFor="nome-do-aluno">Nome do Aluno</label>
+          <label htmlFor="nascimento">Telefone</label>
           <TextField
-            id="nome-do-aluno"
+            id="nascimento"
             variant="outlined"
-
-            disabled
-          />
-
-          <label htmlFor="matricula">Matrícula</label>
-          <TextField
-            id="matricula"
-            variant="outlined"
+            value={data?.telefone}
             disabled
           />
         </div>
