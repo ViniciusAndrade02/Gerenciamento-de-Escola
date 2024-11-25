@@ -103,7 +103,7 @@ const Login = () => {
                     variant="outlined"
                     fullWidth
                     label="Senha"
-                    type="text"
+                    type="password"
                     error={!!errors.password}
                     helperText={errors.password ? errors.password.message : ""}
                   />
