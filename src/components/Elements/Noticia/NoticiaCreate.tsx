@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
 const NoticiaCreate = () => {
   const { token, user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const { mutate } = usePostNoticia();
+  const { mutate, status } = usePostNoticia();
   const [createNoticia, setCreateNoticia] = useState({
     titulo: "",
     conteudo: "",
@@ -56,6 +56,12 @@ const NoticiaCreate = () => {
     formData.append("usuarioId", String(user.id));
     mutate(formData);
   };
+
+  useEffect(() => {
+    if (status === "success") {
+      handleClose();
+    }
+  }, [status]);
 
   const handleChange = (event: any) => {
     const file = event.target.files[0];

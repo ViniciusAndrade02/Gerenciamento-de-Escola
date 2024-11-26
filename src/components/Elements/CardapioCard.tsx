@@ -1,5 +1,5 @@
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Auth";
 import { Box, TextField } from "@mui/material";
 import { useUpdateCardapio } from "../../hooks/Response/Cardapio/UpdateCardapio";
@@ -10,7 +10,7 @@ interface CardapioCard {
 
 const CardapioCard = ({ diaSemana, conteudo }: CardapioCard) => {
   const { user } = useContext(AuthContext);
-  const {mutate} = useUpdateCardapio()
+  const {mutate,status} = useUpdateCardapio()
 
   const [abrirConteudo, setAbrirConteudo] = useState<boolean>(false);
   const [semana,setSemana] = useState({
@@ -26,6 +26,12 @@ const CardapioCard = ({ diaSemana, conteudo }: CardapioCard) => {
     setSemana((prev) => ({ ...prev, semana }));
     setAbrirConteudo(!abrirConteudo);
   };
+
+  useEffect(() => {
+    if(status == "success"){
+      setAbrirConteudo(!abrirConteudo);
+    }
+  },[status])
 
   const editConteudoSemana = (event:FormEvent) => {
     event.preventDefault()
